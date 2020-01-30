@@ -41,7 +41,7 @@ router.post('/create', async function (req, res) {
     }
 })
 
-router.put("/:id", async function (req, res){
+router.put("/update/:id", async function (req, res){
     try {
         const {token} = req.headers;
         const {id} = req.params;
@@ -58,7 +58,7 @@ router.put("/:id", async function (req, res){
     }
 })
 
-router.delete("/:id", async function(req, res){
+router.delete("/delete/:id", async function(req, res){
     console.log(req.params)
     try {
         const {token} = req.headers;
@@ -75,14 +75,40 @@ router.post('/login', async function (req, res) {
     try {
         const {username, password} = req.body;
         const user = await User.findOne({ where: { username: username }});
-        await bcrypt.compare(password, user.dataValues.password);
-        const token = jwt.sign({username, password, iat: Date.now()}, process.env.SECRET, {algorithm: 'HS256'});
-        res.status(200).send({
-            message: "Logged in successfully!",
-            token: token
+        bcrypt.compare(password, user.dataValues.password, async function(){
+            try {
+                const token = jwt.sign({username, password, iat: Date.now()}, process.env.SECRET, {algorithm: 'HS256'});
+                res.status(200).send({
+                    message: "Logged in successfully!",
+                    token: token
+                });
+            } catch(error) {
+                console.error(error.message, error.stack)
+            }
         });
     } catch (error) {
         console.error(error.message, error.stack);
+    }
+})
+
+router.put("/change_password", async function(req, res){
+    try {
+        const { token } = req.headers
+        const {username, currentPassword, newPassword } = req.body
+        await jwt.verify(token, process.env.SECRET, { algorithm: 'HS256' })
+        const user = await User.findOne({ where: { username: username }})
+        bcrypt.compare(currentPassword, user.dataValues.password, async function(error, pass){
+            try {
+                const newHashedPassword = await bcrypt.hash(newPassword, 10)
+                user.password = newHashedPassword
+                await user.save()
+                res.send({ message: "Password has been updated" })
+            } catch(error) {
+                console.error(error.message, error.stack)
+            }
+        })
+    } catch (error) {
+        console.error(error.message, error.stack)
     }
 })
 
