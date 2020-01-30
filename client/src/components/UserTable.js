@@ -3,7 +3,7 @@ import * as ax from 'axios';
 import Modal from "./Modal";
 
 function UserTable(props) {
-  const [state, setState] = useState({ users: [], isLoading: true })
+  const [state, setState] = useState({ users: [], isLoading: true, currentPassword: "", newPassword: "" })
 
   useEffect(() => {
     fetchUsers();
@@ -12,6 +12,14 @@ function UserTable(props) {
       setState({ isLoading: false })
     }
   }, [])
+
+  function handlePasswords(evt) {
+    const {name, value} = evt.target;
+      setState(state => ({
+        ...state, [name]: value
+      })
+    )
+  }
 
   const fetchUsers = async () => {
     const response = await ax({
@@ -64,6 +72,23 @@ function UserTable(props) {
     alert(response.data.message)
   }
 
+  async function changePassword(username) {
+    const response = await ax({
+      method: "PUT",
+      url: "http://localhost:8080/user/change_password",
+      headers: {
+        token: props.token
+      },
+      data: {
+        username: username,
+        currentPassword: state.currentPassword,
+        newPassword: state.newPassword
+      }
+    })
+
+    alert(response.data.message)
+  }
+
   if (!state.isLoading) {
     return (
       <div>
@@ -101,6 +126,13 @@ function UserTable(props) {
                 <td>{user.password}</td>
                 <td>
                   <div className="btn-group">
+                  <button type="button" className="btn btn-sm btn-warning" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
+                    <Modal title="Change Password" modalID="changePasswordModal" submit={() => {changePassword(user.username)}}>
+                      <form>
+                        <input type="text" className="form-control" name="currentPassword" value={state.currentPassword} placeholder="Current Password" onChange={handlePasswords} />
+                        <input type="text" className="form-control" name="newPassword" value={state.newPassword} placeholder="New Password" onChange={handlePasswords} />
+                      </form>
+                    </Modal>
                     <button type="button" className="btn btn-sm btn-info" data-toggle="modal" data-target="#editModal">Edit</button>
                     <Modal title="Edit User" modalID="editModal" submit={() => {editUser(user.id)}}>
                       <form>
