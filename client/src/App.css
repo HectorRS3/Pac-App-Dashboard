@@ -1,10 +1,8 @@
-.Login {
-    background-image: url("https://images.unsplash.com/photo-1532691900426-90f6909545f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
+.nav-link {
+    font-size: 17px;
+    font-weight: 500;
 }
 
-.App {
-    padding-top: 70px;
+.App-content {
+    padding-top: 50px;
 }
