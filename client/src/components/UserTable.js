@@ -36,7 +36,7 @@ function UserTable(props) {
   async function editUser(id) {
     const response = await ax({
       method: "PUT",
-      url: "http://localhost:8080/user/" + id,
+      url: "http://localhost:8080/user/update/" + id,
       headers: {
         token: props.token
       },
@@ -52,7 +52,7 @@ function UserTable(props) {
   }
 
   async function deleteUser(id) {
-    const response = await ax.delete("http://localhost:8080/user/" + id, {
+    const response = await ax.delete("http://localhost:8080/user/delete/" + id, {
       headers: {
         token: props.token
       }
