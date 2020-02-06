@@ -14,10 +14,10 @@ function UserTable(props) {
   }, [])
 
   function handlePasswords(evt) {
-    const {name, value} = evt.target;
-      setState(state => ({
-        ...state, [name]: value
-      })
+    const { name, value } = evt.target;
+    setState(state => ({
+      ...state, [name]: value
+    })
     )
   }
 
@@ -92,64 +92,82 @@ function UserTable(props) {
   if (!state.isLoading) {
     return (
       <div>
-        <button className="btn btn=lg btn-success" onClick={() => {fetchUsers()}}>Refresh Users</button>
+        <button className="btn btn=lg btn-success" onClick={() => { fetchUsers() }}>Refresh Users</button>
         <table className="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Username</th>
-          <th scope="col">Password</th>
-          <th>
-            <button type="button" className="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">Add User</button>
-            <Modal title="Create User" modalID="createModal" submit={() => addUser()}>
-              <form>
-                <input type="text" className="form-control" name="firstName" value={props.firstName} placeholder="First Name" onChange={props.handleChange} />
-                <input type="text" className="form-control" name="lastName" value={props.lastName} placeholder="Last Name" onChange={props.handleChange} />
-                <input type="text" className="form-control" name="username" value={props.username} placeholder="Username" onChange={props.handleChange} />
-                <input type="password" className="form-control" name="password" value={props.password} placeholder="Password" onChange={props.handleChange} />
-              </form>
-            </Modal>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          state.users.map((user, index) => {
-            return (
-              <tr key={index}>
-                <th scope="row">{user.id}</th>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.username}</td>
-                <td>{user.password}</td>
-                <td>
-                  <div className="btn-group">
-                  <button type="button" className="btn btn-sm btn-warning" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
-                    <Modal title="Change Password" modalID="changePasswordModal" submit={() => {changePassword(user.username)}}>
-                      <form>
-                        <input type="text" className="form-control" name="currentPassword" value={state.currentPassword} placeholder="Current Password" onChange={handlePasswords} />
-                        <input type="text" className="form-control" name="newPassword" value={state.newPassword} placeholder="New Password" onChange={handlePasswords} />
-                      </form>
-                    </Modal>
-                    <button type="button" className="btn btn-sm btn-info" data-toggle="modal" data-target="#editModal">Edit</button>
-                    <Modal title="Edit User" modalID="editModal" submit={() => {editUser(user.id)}}>
-                      <form>
-                        <input type="text" className="form-control" name="firstName" value={props.firstName} placeholder="First Name" onChange={props.handleChange} />
-                        <input type="text" className="form-control" name="lastName" value={props.lastName} placeholder="Last Name" onChange={props.handleChange} />
-                        <input type="text" className="form-control" name="username" value={props.username} placeholder="Username" onChange={props.handleChange} />
-                      </form>
-                    </Modal>
-                    <button type="button" className="btn btn-sm btn-danger" onClick={() => { deleteUser(user.id) }}>Delete</button>
-                  </div>
-                </td>
-              </tr>
-            );
-          })
-        }
-      </tbody>
-    </table>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Username</th>
+              <th scope="col">Password</th>
+              <th>
+                <button type="button" className="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">Add User</button>
+                <Modal title="Create User" modalID="createModal" submit={() => addUser()}>
+                  <form>
+                    <div className="form-group">
+                      <input type="text" className="form-control" name="firstName" value={props.firstName} placeholder="First Name" onChange={props.handleChange} />
+                    </div>
+                    <div className="form-group">
+                      <input type="text" className="form-control" name="lastName" value={props.lastName} placeholder="Last Name" onChange={props.handleChange} />
+                    </div>
+                    <div className="form-group">
+                      <input type="text" className="form-control" name="username" value={props.username} placeholder="Username" onChange={props.handleChange} />
+                    </div>
+                    <div className="form-group">
+                      <input type="password" className="form-control" name="password" value={props.password} placeholder="Password" onChange={props.handleChange} />
+                    </div>
+                  </form>
+                </Modal>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              state.users.map((user, index) => {
+                return (
+                  <tr key={index}>
+                    <th scope="row">{user.id}</th>
+                    <td>{user.firstName}</td>
+                    <td>{user.lastName}</td>
+                    <td>{user.username}</td>
+                    <td>{user.password}</td>
+                    <td>
+                      <div className="btn-group">
+                        <button type="button" className="btn btn-sm btn-warning" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>
+                        <Modal title="Change Password" modalID="changePasswordModal" submit={() => { changePassword(user.username) }}>
+                          <form>
+                            <div className="form-group">
+                              <input type="password" className="form-control" name="currentPassword" value={state.currentPassword} placeholder="Current Password" onChange={handlePasswords} />
+                            </div>
+                            <div className="form-group">
+                              <input type="password" className="form-control" name="newPassword" value={state.newPassword} placeholder="New Password" onChange={handlePasswords} />
+                            </div>
+                          </form>
+                        </Modal>
+                        <button type="button" className="btn btn-sm btn-info" data-toggle="modal" data-target="#editModal">Edit</button>
+                        <Modal title="Edit User" modalID="editModal" submit={() => { editUser(user.id) }}>
+                          <form>
+                            <div className="form-group">
+                              <input type="text" className="form-control" name="firstName" value={props.firstName} placeholder="First Name" onChange={props.handleChange} />
+                            </div>
+                            <div className="form-group">
+                              <input type="text" className="form-control" name="lastName" value={props.lastName} placeholder="Last Name" onChange={props.handleChange} />
+                            </div>
+                            <div className="form-group">
+                              <input type="text" className="form-control" name="username" value={props.username} placeholder="Username" onChange={props.handleChange} />
+                            </div>
+                          </form>
+                        </Modal>
+                        <button type="button" className="btn btn-sm btn-danger" onClick={() => { deleteUser(user.id) }}>Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
       </div>
     );
   } else {
