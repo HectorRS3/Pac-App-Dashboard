@@ -75,15 +75,18 @@ router.post('/login', async function (req, res) {
     try {
         const {username, password} = req.body;
         const user = await User.findOne({ where: { username: username }});
-        bcrypt.compare(password, user.dataValues.password, async function(){
-            try {
+        bcrypt.compare(password, user.dataValues.password, function(err, pass){
+            if(err) console.log(err.message, err.stack);
+            
+            if(pass) {
                 const token = jwt.sign({username, password, iat: Date.now()}, process.env.SECRET, {algorithm: 'HS256'});
                 res.status(200).send({
                     message: "Logged in successfully!",
-                    token: token
+                    token: token, 
+                    pass: pass
                 });
-            } catch(error) {
-                console.error(error.message, error.stack)
+            } else {
+                res.send({ message: "Invalid username or password.", pass: pass})
             }
         });
     } catch (error) {

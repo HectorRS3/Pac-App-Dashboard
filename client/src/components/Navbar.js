@@ -10,15 +10,26 @@ function Navbar(props)  {
             </button>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    {props.children}
-                </ul>
-                <div className="my-2 my-lg-0">
-                    <button className="btn btn-outline-light my-2 my-sm-0" type="button" onClick={props.handleLogout}>Logout</button>
-                </div>
+                {props.children}
             </div>
         </nav>
     );
 }
 
-export default Navbar;
+function NavbarLeft(props) {
+    return (
+        <ul className="navbar-nav mr-auto">
+            {props.children}
+        </ul>
+    );
+}
+
+function NavbarRight(props) {
+    return(
+        <div className="my-2 my-lg-0">
+            {props.children}
+        </div>
+    );
+}
+
+export {Navbar, NavbarLeft, NavbarRight};
