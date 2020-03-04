@@ -36,7 +36,7 @@ function UserTable(props) {
   async function editUser(id) {
     const response = await ax({
       method: "PUT",
-      url: "http://localhost:8080/user/" + id,
+      url: "http://localhost:8080/user/update/" + id,
       headers: {
         token: props.token
       },
@@ -52,7 +52,7 @@ function UserTable(props) {
   }
 
   async function deleteUser(id) {
-    const response = await ax.delete("http://localhost:8080/user/" + id, {
+    const response = await ax.delete("http://localhost:8080/user/delete/" + id, {
       headers: {
         token: props.token
       }
@@ -100,7 +100,6 @@ function UserTable(props) {
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Username</th>
-              <th scope="col">Password</th>
               <th>
                 <button type="button" className="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">Add User</button>
                 <Modal title="Create User" modalID="createModal" submit={() => addUser()}>
@@ -131,7 +130,6 @@ function UserTable(props) {
                     <td>{user.firstName}</td>
                     <td>{user.lastName}</td>
                     <td>{user.username}</td>
-                    <td>{user.password}</td>
                     <td>
                       <div className="btn-group">
                         <button type="button" className="btn btn-sm btn-warning" data-toggle="modal" data-target="#changePasswordModal">Change Password</button>

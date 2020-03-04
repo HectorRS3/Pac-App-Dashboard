@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 
 .App {
     padding-top: 100px;
+=======
+.nav-link {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.App-content {
+    padding-top: 50px;
+>>>>>>> 816b7b728df9689cf9e275f7b02d80e153a78ffb
 }
