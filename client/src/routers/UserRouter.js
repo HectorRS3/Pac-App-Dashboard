@@ -1,51 +1,16 @@
-import React, {useState} from 'react';
-import * as ax from 'axios';
-
+import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
   } from "react-router-dom";
 
   import {Navbar, NavbarLeft, NavbarRight} from '../components/Navbar';
+  import Actividades from '../views/Actividades';
 
   export default function UserRouter(props) {
-      const [user, setUser] = useState({
-          username: "",
-          password: ""
-      });
-
-      function handleChange(evt) {
-        const { name, value } = evt.target;
-        setUser(user => ({
-          ...user, [name]: value
-        })
-        );
-      }
-
-      async function handleLogin(evt) {
-        try {
-          evt.preventDefault();
-          const response = await ax({
-            method: "POST",
-            url: "http://localhost:8080/user/login",
-            data: {
-              username: user.username,
-              password: user.password
-            }
-          });
-    
-          if (response.data.pass) {
-            props.setState({ token: response.data.token, isLogged: true });
-          } else {
-            alert(response.data.message)
-          }
-        } catch (err) {
-          console.error(err.message, err.stack);
-        }
-      }
-
       return(
           <Router>
               <Navbar title="Pac App">
@@ -57,15 +22,16 @@ import {
                     </NavbarLeft>
                     <NavbarRight>
                         <form className="form-inline my-2 my-lg-0">
-                            <input className="form-control mr-sm-2" type="text" placeholder="Username" name="username" value={user.username} onChange={handleChange} />
-                            <input className="form-control mr-sm-2" type="password" placeholder="Password" name="password" value={user.password} onChange={handleChange} />
+                            <input className="form-control mr-sm-2" type="text" placeholder="Username" name="username" value={props.username} onChange={props.handleChange} />
+                            <input className="form-control mr-sm-2" type="password" placeholder="Password" name="password" value={props.password} onChange={props.handleChange} />
                             <button className="btn btn-outline-light my-2 my-sm-0" type="submit" onClick={props.handleLogin}>Login</button>
                         </form>
                     </NavbarRight>
                 </Navbar>
                 <Switch>
+                    <Redirect exact from="/" to="/actividades" />
                     <Route path="/actividades">
-                        {/* <Actividades/> */}
+                        <Actividades/>
                     </Route>
                     <Route path="/educacion">
                         {/* <Educacion/> */}

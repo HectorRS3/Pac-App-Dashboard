@@ -3,16 +3,13 @@ import {
     BrowserRouter as Router,
     Link,
     Switch,
-    Route
+    Route,
+    Redirect
 } from "react-router-dom";
 
 import { Navbar, NavbarLeft, NavbarRight } from '../components/Navbar';
 
 export default function AdminRouter(props) {
-    function handleLogout() {
-        props.setState({ token: "", isLogged: false })
-    }
-
     return (
         <Router>
             <Navbar title="Pac App">
@@ -24,10 +21,11 @@ export default function AdminRouter(props) {
                     <Link className="nav-link" to="/admin/ayudas">Ayudas</Link>
                 </NavbarLeft>
                 <NavbarRight>
-                    <button className="btn btn-outline-light" onClick={handleLogout}>Logout</button>
+                    <button className="btn btn-outline-light" onClick={props.handleLogout}>Logout</button>
                 </NavbarRight>
             </Navbar>
             <Switch>
+                <Redirect exact from="/" to="/admin/actividades" />
                 <Route path="/admin/actividades">
                     {/* <AdminActividades/> */}
                 </Route>
