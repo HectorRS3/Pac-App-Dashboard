@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import { Navbar, NavbarLeft, NavbarRight } from '../components/Navbar';
+import AdminActividades from '../views/Admin/AdminActividades';
 
 export default function AdminRouter(props) {
     return (
@@ -27,7 +28,7 @@ export default function AdminRouter(props) {
             <Switch>
                 <Redirect exact from="/" to="/admin/actividades" />
                 <Route path="/admin/actividades">
-                    {/* <AdminActividades/> */}
+                    <AdminActividades/>
                 </Route>
                 <Route path="/admin/educacion">
                     {/* <AdminEducacion/> */}

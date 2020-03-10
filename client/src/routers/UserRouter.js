@@ -9,6 +9,9 @@ import {
 
   import {Navbar, NavbarLeft, NavbarRight} from '../components/Navbar';
   import Actividades from '../views/Actividades';
+  import Educacion from '../views/Educacion';
+  import Recursos from '../views/Recursos';
+  import Ayuda from '../views/Ayuda';
 
   export default function UserRouter(props) {
       return(
@@ -18,7 +21,7 @@ import {
                         <Link className="nav-link" to="/actividades">Actividades</Link>
                         <Link className="nav-link" to="/educacion">Educacion</Link>
                         <Link className="nav-link" to="/recursos">Recursos</Link>
-                        <Link className="nav-link" to="/ayudas">Ayudas</Link>
+                        <Link className="nav-link" to="/ayuda">Ayuda</Link>
                     </NavbarLeft>
                     <NavbarRight>
                         <form className="form-inline my-2 my-lg-0">
@@ -33,14 +36,17 @@ import {
                     <Route path="/actividades">
                         <Actividades/>
                     </Route>
+                    <Redirect exact from="/" to="/educacion" />
                     <Route path="/educacion">
-                        {/* <Educacion/> */}
+                        <Educacion/>
                     </Route>
+                    <Redirect exact from="/" to="/recursos" />
                     <Route path="/recursos">
-                        {/* <Recursos/> */}
+                        <Recursos/>
                     </Route>
-                    <Route path="/ayudas">
-                        {/* <Ayudas/> */}
+                    <Redirect exact from="/" to="/ayuda" />
+                    <Route path="/ayuda">
+                        <Ayuda/>
                     </Route>
                 </Switch>
           </Router>
