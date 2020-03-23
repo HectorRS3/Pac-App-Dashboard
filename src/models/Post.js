@@ -10,7 +10,11 @@ Articles.init({
     summary: Sequelize.STRING,
     body: Sequelize.STRING,
     link: Sequelize.STRING,
-    tags: Sequelize.STRING,
+    tags: {
+        type: Sequelize.ARRAY,
+        allowNull: true,
+        default: []
+    },
     category: Sequelize.STRING
 },{sequelize, modelName: 'post'})
 
