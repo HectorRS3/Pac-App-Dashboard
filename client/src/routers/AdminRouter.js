@@ -9,6 +9,7 @@ import {
 
 import { Navbar, NavbarLeft, NavbarRight } from '../components/Navbar';
 import AdminActividades from '../views/Admin/AdminActividades';
+import AdminEducacion from '../views/Admin/AdminEducacion';
 
 export default function AdminRouter(props) {
     return (
@@ -30,8 +31,9 @@ export default function AdminRouter(props) {
                 <Route path="/admin/actividades">
                     <AdminActividades/>
                 </Route>
+                <Redirect exact from="/" to="/admin/actividades" />
                 <Route path="/admin/educacion">
-                    {/* <AdminEducacion/> */}
+                    <AdminEducacion/>
                 </Route>
                 <Route path="/admin/recursos">
                     {/* <AdminRecursos/> */}

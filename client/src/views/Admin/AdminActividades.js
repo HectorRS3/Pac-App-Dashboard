@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 // THIS IS THE CURRENT IMPLEMENTATION //
-function AdminActividades() {
+function AdminActividades(){
     const [state] = useState({
         actividades: [
             { title: "Party en casa", date: "21/enero/2021", location: "800 Piedras Negras Apt. 5104 San Juan PR 00926" },
