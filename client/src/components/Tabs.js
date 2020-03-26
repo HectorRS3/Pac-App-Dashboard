@@ -16,6 +16,9 @@ function Tabs(props) {
         <li className="nav-item">
           <a className="nav-link" id="pills-help-tab" data-toggle="pill" href="#pills-help" role="tab" aria-controls="pills-help" aria-selected="false">Help</a>
         </li>
+        <li className="nav-item">
+          <a className="nav-link" id="pills-help-tab" data-toggle="pill" href="#pills-help" role="tab" aria-controls="pills-help" aria-selected="false">Post</a>
+        </li>
       </ul>
       <div className="tab-content" id="pills-tabContent">
         <div className="tab-pane fade" id="pills-activities" role="tabpanel" aria-labelledby="pills-activities-tab">
@@ -29,6 +32,9 @@ function Tabs(props) {
         </div>
         <div className="tab-pane fade" id="pills-help" role="tabpanel" aria-labelledby="pills-help-tab">
           {props.helpView}
+        </div>
+        <div className="tab-pane fade" id="pills-help" role="tabpanel" aria-labelledby="pills-help-tab">
+          {props.postView}
         </div>
       </div>
     </div>

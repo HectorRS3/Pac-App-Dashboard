@@ -3,7 +3,6 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const Ayuda = require('../models/Ayuda');
 
-
 router.get("/", async function (req,res) {
     try {
         const {token} = req.headers;
@@ -13,11 +12,11 @@ router.get("/", async function (req,res) {
     } catch (error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 router.get("/:id", async function (req, res) {
     try {
-        const {token} = req.headers
+        const {token} = req.headers;
         const {id} = req.params;
         await jwt.verify(token, process.env.SECRET, {algorithm: 'HS256'});
         const ayuda = await Ayuda.find({ where: { id: id } });
@@ -25,7 +24,7 @@ router.get("/:id", async function (req, res) {
     } catch (error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 router.post("/create", async function (req, res) {
     try {
@@ -33,12 +32,12 @@ router.post("/create", async function (req, res) {
         const {title, number, links} = req.body;
         await jwt.verify(token, process.env.SECRET, {algorithm: 'HS256'});
         const nuevaAyuda = new Ayuda({title: title, number: number, links: links});
-        nuevaAyuda.save();
+        await nuevaAyuda.save();
         res.send({ message: "La base de datos ha sido actualizada!"});
     } catch(error) {
         console.error({message: "Algo malo ha ocurrido. Por favor, intentalo de nuevo.", stack: error.stack});
     }
-});
+})
 
 router.put("/update/:id", async function (req, res){
     try {
@@ -46,7 +45,7 @@ router.put("/update/:id", async function (req, res){
         const {id} = req.params;
         const {title,number,link} = req.body;
 
-        await jwt.verify(token,process.env.SECRET, {algorithm: 'HS256' });
+        await jwt.verify(token, process.env.SECRET, {algorithm: 'HS256' });
         const ayuda = Ayuda.find({where: { id:id} });
         ayuda.title = title;
         ayuda.number = number;
@@ -57,19 +56,19 @@ router.put("/update/:id", async function (req, res){
     } catch(error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 router.delete("delete/:id", async function (req,res) {
     try {
         const {token} = req.headers;
         const {id} = req.params;
-        await jwt.verify(token, process.env.SECRET, {algrithm = "HS256"});
+        await jwt.verify(token, process.env.SECRET, {algrithm: "HS256"});
         const ayuda = await ayuda.find({ where: {id: id}});
         await ayuda.remove();
-        res.send({ message: "Esa ayuda ha sido removida, pongase a trabajar." });
+        res.send({ message: "Esa ayuda ha sido removida." });
     } catch (error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 module.exports = router;
