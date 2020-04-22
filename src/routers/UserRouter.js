@@ -12,6 +12,7 @@ import {
   import Educacion from '../views/Educacion';
   import Recursos from '../views/Recursos';
   import Ayuda from '../views/Ayuda';
+  import Post from '../views/Post';
 
   export default function UserRouter(props) {
       return(
@@ -22,6 +23,7 @@ import {
                         <Link className="nav-link" to="/educacion">Educacion</Link>
                         <Link className="nav-link" to="/recursos">Recursos</Link>
                         <Link className="nav-link" to="/ayuda">Ayuda</Link>
+                        <Link className="nav-link" to="/ayuda">Post</Link>
                     </NavbarLeft>
                     <NavbarRight>
                         <form className="form-inline my-2 my-lg-0">
@@ -47,6 +49,10 @@ import {
                     <Redirect exact from="/" to="/ayuda" />
                     <Route path="/ayuda">
                         <Ayuda/>
+                    </Route>
+                    <Redirect exact from="/" to="/post" />
+                    <Route path="/post">
+                        <Post/>
                     </Route>
                 </Switch>
           </Router>

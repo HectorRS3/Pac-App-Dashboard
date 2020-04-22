@@ -13,12 +13,12 @@ router.get("/", async function (req, res) {
     } catch (error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 // http://localhost:8080/posts/654
 router.get("/:id", async function (req, res) {
     try {
-        const { token } = req.headers
+        const { token } = req.headers;
         const { id } = req.params;
         await jwt.verify(token, process.env.SECRET, { algorithm: 'HS256' });
         const post = await Post.find({ where: { id: id } });
@@ -26,7 +26,7 @@ router.get("/:id", async function (req, res) {
     } catch (error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 router.post("/create", async function (req, res) {
     try {
@@ -57,7 +57,7 @@ router.post("/create", async function (req, res) {
     } catch (error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 router.put("/update/:id", async function (req, res) {
     try {
@@ -87,7 +87,7 @@ router.put("/update/:id", async function (req, res) {
     } catch (error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 router.delete("/delete/:id", async function (req, res) {
     try {
@@ -100,6 +100,6 @@ router.delete("/delete/:id", async function (req, res) {
     } catch (error) {
         console.error(error.message, error.stack);
     }
-});
+})
 
 module.exports = router;

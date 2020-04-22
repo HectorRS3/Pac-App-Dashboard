@@ -4,7 +4,7 @@ const Model = Sequelize.Model;
 
 class Ayuda extends Model {}
 
-Actividades.init({
+Ayuda.init({
     title: Sequelize.STRING,
     number: Sequelize.STRING,
     link: Sequelize.STRING,
