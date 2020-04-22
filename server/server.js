@@ -9,7 +9,7 @@ const port = process.env.PORT || 8080;
 const connection = require('./connection');
 
 // Routes
-const userRoutes = require('./src/routes/User');
+const userRoutes = require('./routes/User');
 
 // Initiate connection with MongoDB.
 app.use(connection, function(){
