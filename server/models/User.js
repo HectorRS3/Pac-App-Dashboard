@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const sequelize = require("../../connection");
+const sequelize = require("../connection");
 const Model = Sequelize.Model;
 
 class User extends Model {}
