@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Table, Container } from 'react-bootstrap'
 
-//Current implementation practice//
 function Educacion() {
     const [state, setState] = useState(undefined)
     useEffect(() => {
