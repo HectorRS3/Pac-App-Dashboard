@@ -151,7 +151,7 @@ function UserTable(props) {
                             </div>
                             <div className="form-group">
                               <input type="text" className="form-control" name="lastName" value={props.lastName} placeholder="Last Name" onChange={props.handleChange} />
-                  4444444444444444444444444444444444444444444444444444444444444444444444444          </div>
+                            </div>
                             <div className="form-group">
                               <input type="text" className="form-control" name="username" value={props.username} placeholder="Username" onChange={props.handleChange} />
                             </div>

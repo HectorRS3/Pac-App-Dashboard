@@ -6,9 +6,10 @@ const Post = require('../models/Post');
 // http://localhost:8080/posts/
 router.get("/", async function (req, res) {
     try {
-        const { token } = req.headers;
-        await jwt.verify(token, process.env.SECRET, { algorithm: 'HS256' });
-        const posts = await Post.findAll();
+        // const { token } = req.headers;
+        // await jwt.verify(token, process.env.SECRET, { algorithm: 'HS256' });
+        const {filter} = req.headers;
+        const posts = await Post.findAll({where: {category: filter}});
         res.send(posts);
     } catch (error) {
         console.error(error.message, error.stack);
@@ -53,7 +54,7 @@ router.post("/create", async function (req, res) {
         });
 
         await newPost.save();
-        res.send({ message: "Post has been created!", post: post });
+        res.send({ message: "Post has been created!", post: newPost });
     } catch (error) {
         console.error(error.message, error.stack);
     }
