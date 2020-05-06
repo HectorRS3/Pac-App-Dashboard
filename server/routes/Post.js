@@ -8,8 +8,8 @@ router.get("/", async function (req, res) {
     try {
         // const { token } = req.headers;
         // await jwt.verify(token, process.env.SECRET, { algorithm: 'HS256' });
-        const {filter} = req.headers;
-        const posts = await Post.findAll({where: {category: filter}});
+        // const {filter} = req.headers;
+        const posts = await Post.findAll();
         res.send(posts);
     } catch (error) {
         console.error(error.message, error.stack);
@@ -19,9 +19,9 @@ router.get("/", async function (req, res) {
 // http://localhost:8080/posts/654
 router.get("/:id", async function (req, res) {
     try {
-        const { token } = req.headers;
+        // const { token } = req.headers;
         const { id } = req.params;
-        await jwt.verify(token, process.env.SECRET, { algorithm: 'HS256' });
+        // await jwt.verify(token, process.env.SECRET, { algorithm: 'HS256' });
         const post = await Post.find({ where: { id: id } });
         res.send(post);
     } catch (error) {

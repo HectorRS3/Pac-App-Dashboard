@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Table, Container } from 'react-bootstrap'
 
-//Current implementation practice//
 function Educacion() {
     const [state, setState] = useState(undefined)
     useEffect(() => {
@@ -16,10 +15,7 @@ function Educacion() {
     async function fetchData() {
         const response = await Axios({
             method: 'GET',
-            url: "http://localhost:8080/post/",
-            headers: {
-                filter: "Educacion"
-            }
+            url: "http://localhost:8080/post/"
         })
 
         setState(response.data);

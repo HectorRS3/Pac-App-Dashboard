@@ -1,27 +1,70 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import Axios from 'axios'
+import { Table, Container } from 'react-bootstrap'
 
-//Current Implementation Practice//
 function Recursos() {
-    const [state] = useState({
-        recursos: [
-            {title:"Locales para hacer Fiestas", date:"15/Feb/2020"},
-            {title:"Locales para hacer Fiestas", date:"15/Feb/2020"},
-            {title:"Locales para hacer Fiestas", date:"15/Feb/2020"},
-        ]
-    })
+    const [state, setState] = useState(undefined)
+    useEffect(() => {
+      fetchData();
+      
+      return function cleanup() {
+          console.log("Done!")
+      }
+    }, [])
 
-    return (
-        <div>
-            <h1>Recursos</h1>
-            <ul>
-                {
-                    state.recursos.map(recursos => {
-                    return <li>{recursos.title} - {recursos.date}</li>
-                    })
-                }
-            </ul>
-        </div>
-    )
+    async function fetchData() {
+        const response = await Axios({
+            method: 'GET',
+            url: "http://localhost:8080/post/",
+            headers: {
+                filter: "Recursos"
+            }
+        })
+
+        setState(response.data);
+    }
+
+    if(!state) {
+        return (
+            <p>LOADING...</p>
+        )
+    } else {
+        return (
+            <Container>
+                <h1>Recursos</h1>
+                <Table striped hover>
+                    <thead>
+                        <tr>
+                            <th>title</th>
+                            <th>author</th>
+                            <th>summary</th>
+                            <th>body</th>
+                            <th>link</th>
+                            <th>tags</th>
+                            <th>category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            state.map(item => {
+                                return (
+                                    <tr>
+                                        <td>{item.title}</td>
+                                        <td>{item.author}</td>
+                                        <td>{item.summary}</td>
+                                        <td>{item.body}</td>
+                                        <td>{item.link}</td>
+                                        <td>{item.tags}</td>
+                                        <td>{item.category}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </Table>
+            </Container>
+        )
+    }
 }
 
 export default Recursos

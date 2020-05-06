@@ -1,45 +1,53 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Link,
     Switch,
-    Route,
-    Redirect
+    Redirect,
+    Route
 } from "react-router-dom";
 
-import { Navbar, NavbarLeft, NavbarRight } from '../components/Navbar';
+import { Navbar, Nav } from 'react-bootstrap';
+
+import AdminUsers from '../views/Admin/AdminUsers';
 import AdminActividades from '../views/Admin/AdminActividades';
-import AdminEducacion from '../views/Admin/AdminEducacion';
+import AdminPosts from '../views/Admin/AdminPosts';
+import AdminAyuda from '../views/Admin/AdminAyuda';
 
 export default function AdminRouter(props) {
+    function handleLogout(){
+        localStorage.removeItem('token');
+        window.location.replace('/');
+    }
     return (
         <Router>
-            <Navbar title="Pac App">
-                <NavbarLeft>
-                    <Link className="nav-link" to="/admin/usuarios">Usuarios</Link>
-                    <Link className="nav-link" to="/admin/actividades">Actividades</Link>
-                    <Link className="nav-link" to="/admin/educacion">Educacion</Link>
-                    <Link className="nav-link" to="/admin/recursos">Recursos</Link>
-                    <Link className="nav-link" to="/admin/ayudas">Ayudas</Link>
-                </NavbarLeft>
-                <NavbarRight>
-                    <button className="btn btn-outline-light" onClick={props.handleLogout}>Logout</button>
-                </NavbarRight>
+            <Navbar bg="primary" variant="dark" expand="lg" fixed="top">
+                <Navbar.Brand href="/">Pac App Dashboard</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/admin/users">Users</Nav.Link>
+                        <Nav.Link href="/admin/actividades">Actividades</Nav.Link>
+                        <Nav.Link href="/admin/posts">Posts</Nav.Link>
+                        <Nav.Link href="/admin/ayuda">Ayuda</Nav.Link>
+                    </Nav>
+                    <Nav>
+                        <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
             <Switch>
-                <Redirect exact from="/" to="/admin/actividades" />
+                <Redirect exact from="/" to="/admin/users" />
+                <Route path="/admin/users">
+                    <AdminUsers/>
+                </Route>
                 <Route path="/admin/actividades">
                     <AdminActividades/>
                 </Route>
-                <Redirect exact from="/" to="/admin/actividades" />
-                <Route path="/admin/educacion">
-                    <AdminEducacion/>
+                <Route path="/admin/posts">
+                    <AdminPosts/>
                 </Route>
-                <Route path="/admin/recursos">
-                    {/* <AdminRecursos/> */}
-                </Route>
-                <Route path="/admin/ayudas">
-                    {/* <AdminAyudas/> */}
+                <Route path="/admin/ayuda">
+                    <AdminAyuda/>
                 </Route>
             </Switch>
         </Router>
