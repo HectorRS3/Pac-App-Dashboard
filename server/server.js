@@ -30,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true})); // application/x-www-form-url
 app.use('/user', userRoutes);
 app.use('/post', postRoutes);
 app.use('/actividades', actividadesRoutes);
+app.use('/ayudas', ayudasRoutes);
 
 app.listen(port, function(req, res){
     connection.sync();
