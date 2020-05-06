@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Table, Container } from 'react-bootstrap'
 
-function Ayuda() {
+function AdminAyuda() {
     const [state, setState] = useState(undefined)
     useEffect(() => {
       fetchData();
@@ -16,9 +16,6 @@ function Ayuda() {
         const response = await Axios({
             method: 'GET',
             url: "http://localhost:8080/ayudas/",
-            headers: {
-                filter: "Ayuda"
-            }
         })
 
         setState(response.data);
@@ -31,7 +28,7 @@ function Ayuda() {
     } else {
         return (
             <Container>
-                <h1>Ayuda</h1>
+                <h1>Admin Ayuda</h1>
                 <Table striped hover>
                     <thead>
                         <tr>
@@ -59,4 +56,4 @@ function Ayuda() {
     }
 }
 
-export default Ayuda
+export default AdminAyuda;

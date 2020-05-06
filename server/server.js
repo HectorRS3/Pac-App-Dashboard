@@ -11,8 +11,8 @@ const connection = require('./connection');
 // Routes
 const userRoutes = require('./routes/User');
 const postRoutes = require("./routes/Post");
-// const ayudaRoutes = require("./routes/Ayuda");
-// const actividadesRoutes = require("./routes/Actividades");
+const actividadesRoutes = require("./routes/Actividades");
+const ayudasRoutes = require("./routes/Ayuda");
 
 // Initiate connection with MongoDB.
 app.use(connection, function(){
@@ -29,8 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true})); // application/x-www-form-url
 // Route list
 app.use('/user', userRoutes);
 app.use('/post', postRoutes);
-// app.use('/ayuda', ayudaRoutes);
-// app.use('/actividades', actividadesRoutes);
+app.use('/actividades', actividadesRoutes);
+app.use('/ayudas', ayudasRoutes);
 
 app.listen(port, function(req, res){
     connection.sync();

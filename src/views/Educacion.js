@@ -15,10 +15,7 @@ function Educacion() {
     async function fetchData() {
         const response = await Axios({
             method: 'GET',
-            url: "http://localhost:8080/post/",
-            headers: {
-                filter: "Educacion"
-            }
+            url: "http://localhost:8080/post/"
         })
 
         setState(response.data);
