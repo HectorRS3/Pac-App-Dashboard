@@ -27,6 +27,7 @@ function AdminActividades(props) {
         setState(response.data);
     }
 
+
     if (!state) {
         return (
             <p>LOADING...</p>
