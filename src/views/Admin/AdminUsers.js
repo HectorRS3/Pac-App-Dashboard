@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
+
 import CreateUserModal from '../../components/UsersComponents/CreateUserModal';
 import EditUserModal from '../../components/UsersComponents/EditUserModal';
-import DeleteUserButton from '../../components/UsersComponents/DeleteUserButton';
+import DeleteUserModal from '../../components/UsersComponents/DeleteUserModal';
 
 function AdminActividades(props) {
     const [state, setState] = useState(undefined)
@@ -66,7 +67,7 @@ function AdminActividades(props) {
                                         <td>{item.username}</td>
                                         <td>{item.password}</td>
                                         <td>
-                                            <EditUserModal userId={item.id}/> <DeleteUserButton userId={item.id}/>
+                                            <EditUserModal userId={item.id}/> <DeleteUserModal userId={item.id} username={item.username} firstName={item.firstName}/>
                                         </td>
                                     </tr>
                                 )

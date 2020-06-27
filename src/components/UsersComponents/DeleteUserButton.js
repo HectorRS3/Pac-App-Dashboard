@@ -15,13 +15,14 @@ function DeleteUserButton(props) {
             });
 
             window.alert(response.data.message);
+            window.location.reload();
         } catch (error) {
             console.error(error.message, error.stack);
         }
     }
 
     return(
-          <Button size="sm" variant="danger" onClick={DELETEDIS}>Delete</Button>
+          <Button variant="danger" onClick={DELETEDIS}>Delete</Button>
     );
 }
 
