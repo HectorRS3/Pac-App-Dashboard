@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
-import { Table, Container } from 'react-bootstrap'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
-import CreateActividadesModal from '../../Components/UserComponents/CreateActividadesModal'
+import CreateActividadesModal from '../../components/UsersComponents/CreateActividadesModal'
 
 function AdminActividades() {
     const [state, setState] = useState(undefined)

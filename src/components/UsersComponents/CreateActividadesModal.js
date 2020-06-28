@@ -14,7 +14,7 @@ function CreateActividadesModal() {
                     <Modal.Title>Create Activity</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <UserType edit={false}/>
+                    // TODO: New Form
                 </Modal.Body>
             </Modal>
         </>
