@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
-import { Table, Container } from 'react-bootstrap'
+import { Navbar, Nav, Table, Container } from 'react-bootstrap'
+import CreateAyudasModal from '../../components/UsersComponents/CreateAyudasModal'
 
 function AdminAyuda() {
     const [state, setState] = useState(undefined)
@@ -16,6 +17,9 @@ function AdminAyuda() {
         const response = await Axios({
             method: 'GET',
             url: "http://localhost:8080/ayudas/",
+            headers: {
+                filter: "AdminAyuda"
+            }
         })
 
         setState(response.data);
@@ -28,7 +32,15 @@ function AdminAyuda() {
     } else {
         return (
             <Container>
-                <h1>Admin Ayuda</h1>
+                  <Navbar bg="primary" variant="dark">
+                    <Navbar.Brand>Admin Ayudas</Navbar.Brand>
+                    <Nav className="mr-auto">
+                    </Nav>
+                    <Nav>
+                        <CreateAyudasModal/> 
+                    </Nav>
+                </Navbar>
+
                 <Table striped hover>
                     <thead>
                         <tr>
