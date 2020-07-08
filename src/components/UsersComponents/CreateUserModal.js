@@ -79,5 +79,4 @@ function CreateUserModal() {
         </>
     );
 }
-
 export default CreateUserModal;
