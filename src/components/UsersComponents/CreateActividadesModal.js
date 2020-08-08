@@ -32,7 +32,7 @@ function CreateActividadesModal() {
                     date: date,
                     summary: summary,
                     body: body,
-                    libk: link,
+                    link: link,
                     tags: tags
 
                 }
@@ -54,7 +54,6 @@ function CreateActividadesModal() {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-
                         <Form.Group controlId="formBasicTitle">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" name="title" placeholder="Enter Title" value={title} onChange={setTitle} />

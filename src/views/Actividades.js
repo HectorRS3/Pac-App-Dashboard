@@ -60,4 +60,4 @@ function Actividades() {
     }
 }
 
-export default Actividades
+export default Actividades;
