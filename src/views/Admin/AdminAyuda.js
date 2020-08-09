@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
-import CreateAyudasModal from '../../components/UsersComponents/CreateAyudasModal'
+import CreateAyudasModal from '../../components/UsersComponents/CreateAyudasModal';
+import EditAyudasModal from '../../components/UsersComponents/EditAyudasModal'
 
 function AdminAyuda() {
     const [state, setState] = useState(undefined)
@@ -57,6 +58,9 @@ function AdminAyuda() {
                                         <td>{item.title}</td>
                                         <td>{item.number}</td>
                                         <td>{item.link}</td>
+                                        <td>
+                                            <EditAyudasModal/>
+                                        </td>
                                     </tr>
                                 )
                             })

@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
-import CreateActividadesModal from '../../components/UsersComponents/CreateActividadesModal'
+
+import CreateActividadesModal from '../../components/UsersComponents/CreateActividadesModal';
+import EditActividadesModal from '../../components/UsersComponents/EditActividadesModal'
 
 function AdminActividades() {
     const [state, setState] = useState(undefined)
@@ -16,7 +18,7 @@ function AdminActividades() {
     async function fetchData() {
         const response = await Axios({
             method: 'GET',
-            url: "http://localhost:8080/post/",
+            url: "http://localhost:8080/actividades/",
             headers: {
                 filter: "AdminActividades"
             }
@@ -65,6 +67,9 @@ function AdminActividades() {
                                         <td>{item.body}</td>
                                         <td>{item.link}</td>
                                         <td>{item.tags}</td>
+                                        <td>
+                                            <EditActividadesModal/>
+                                        </td>
                                     </tr>
                                 )
                             })

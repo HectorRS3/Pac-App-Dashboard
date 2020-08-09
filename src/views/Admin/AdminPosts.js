@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
-import CreatePostsModal from '../../components/UsersComponents/CreatePostsModal'
+import CreatePostsModal from '../../components/UsersComponents/CreatePostsModal';
+import EditPostsModal from '../../components/UsersComponents/EditPostsModal'
 
 
 function AdminPosts() {
@@ -66,6 +67,9 @@ function AdminPosts() {
                                         <td>{item.link}</td>
                                         <td>{item.tags}</td>
                                         <td>{item.category}</td>
+                                        <td>
+                                            <EditPostsModal/>
+                                        </td>
                                     </tr>
                                 )
                             })
