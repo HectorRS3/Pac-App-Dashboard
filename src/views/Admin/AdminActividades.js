@@ -3,7 +3,8 @@ import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
 
 import CreateActividadesModal from '../../components/UsersComponents/CreateActividadesModal';
-import EditActividadesModal from '../../components/UsersComponents/EditActividadesModal'
+import EditActividadesModal from '../../components/UsersComponents/EditActividadesModal';
+import DeleteActividadesModal from '../../components/UsersComponents/DeleteActividadesModal'
 
 function AdminActividades() {
     const [state, setState] = useState(undefined)
@@ -69,6 +70,7 @@ function AdminActividades() {
                                         <td>{item.tags}</td>
                                         <td>
                                             <EditActividadesModal/>
+                                            <DeleteActividadesModal/>
                                         </td>
                                     </tr>
                                 )
