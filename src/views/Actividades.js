@@ -43,13 +43,12 @@ function Actividades() {
                         {
                             state.map(item => {
                                 return (
-                                    <tr>
-                                        <td>{item.title}</td>
-                                        <td>{item.organizer}</td>
+                                    <ul>
+                                        <li>{item.title} {item.organizer}</li>
                                         <td>{item.date}</td>
                                         <td>{item.description}</td>
                                         <td>{item.link}</td>
-                                    </tr>
+                                    </ul>
                                 )
                             })
                         }
