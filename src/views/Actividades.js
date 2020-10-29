@@ -44,10 +44,8 @@ function Actividades() {
                             state.map(item => {
                                 return (
                                     <ul>
-                                        <li>{item.title} {item.organizer}</li>
-                                        <td>{item.date}</td>
+                                        <li><a href={item.link} target="_blank"> {item.title}</a> by {item.organizer}</li>
                                         <td>{item.description}</td>
-                                        <td>{item.link}</td>
                                     </ul>
                                 )
                             })
