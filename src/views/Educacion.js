@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
-import { ListGroup, Container } from 'react-bootstrap'
+import { Table, ListGroup, Container } from 'react-bootstrap'
 
 function Educacion() {
     const [state, setState] = useState(undefined)
@@ -30,15 +30,22 @@ function Educacion() {
             <Container>
                 <h1>Educacion</h1>
                 <hr/>
-                <ListGroup variant="flush">
-                    {
-                        state.map(educacion => {
-                            return (<ListGroup.Item action variant="light"><a href="">{educacion.title}</a> by {educacion.author}
-                                        <ul>{educacion.summary}</ul>
-                                        </ListGroup.Item>)
-                        })
-                    }
-                </ListGroup>
+                   
+                    <tbody>
+                        {
+                            state.map(item => {
+                                return (
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a href={item.link} target="_blank"> {item.title}</a></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">by {item.author}</h6>
+                                        <p class="card-text">{item.description}</p>
+                                        <a href="#" class="card-link">Share</a>
+                                    </div>
+                                )
+                            })
+                        }
+                    </tbody>
+
             </Container>
         )
     }
