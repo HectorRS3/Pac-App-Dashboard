@@ -1,20 +1,18 @@
 import React from 'react';
 import Axios from 'axios';
 import { Button } from 'react-bootstrap';
+import { deleteUser } from '../../api/users';
 
 function DeleteUserButton(props) {
     async function DELETEDIS(event) {
         try {
             event.preventDefault();
-            const response = await Axios({
-                method: 'DELETE',
-                url: 'http://localhost:8080/user/delete/' + props.userId,
-                headers: {
-                    token: localStorage.getItem('token')
-                }
-            });
+            const {message} = await deleteUser(
+                localStorage.getItem('token'),
+                props.userId
+            )
 
-            window.alert(response.data.message);
+            window.alert(message);
             window.location.reload();
         } catch (error) {
             console.error(error.message, error.stack);

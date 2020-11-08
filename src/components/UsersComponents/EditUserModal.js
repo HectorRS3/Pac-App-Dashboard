@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { Form, Modal, Button } from 'react-bootstrap';
 import useInput from '../../hooks/useInput'
+import { updateUser } from '../../api/users';
 
 function EditUserModal(props) {
     const [show, setShow] = useState(false);
@@ -16,20 +17,15 @@ function EditUserModal(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            let response = await Axios({
-                method: 'PUT',
-                url: 'http://localhost:8080/user/update/' + props.userId,
-                headers: {
-                    token: localStorage.getItem('token')
-                },
-                data: {
-                    firstName: firstName,
-                    lastName: lastName,
-                    username: username
-                }
-            });
+            const { message } = await updateUser(
+                localStorage.getItem('token'),
+                props.userId,
+                firstName,
+                lastName,
+                username
+            )
     
-            window.alert(response.data.message)
+            window.alert(message)
             window.location.reload()
         } catch(error) {
             window.console.log(error.message, error.stack)
