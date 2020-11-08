@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Modal, Button} from 'react-bootstrap';
+
 function CreateAyudasModal() {
     const [show, setShow] = useState(false);
     
@@ -14,7 +15,7 @@ function CreateAyudasModal() {
                     <Modal.Title>Create Help</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    // TODO: New Form
+                    
                 </Modal.Body>
             </Modal>
         </>
