@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
 import CreateActividadesModal from '../../components/EventComponents/CreateActividadesModal'
+import EditActividadesModal from '../../components/EventComponents/EditActividadesModal'
+import DeleteActividadesModal from '../../components/EventComponents/DeleteActividadesModal'
 
 function AdminActividades() {
     const [state, setState] = useState(undefined)
