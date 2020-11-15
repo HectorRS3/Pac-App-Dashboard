@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import Axios from 'axios';
-import {Form, Modal, Button} from 'react-bootstrap';
-import useInput from '../../hooks/useInput';
+import {Modal, Button} from 'react-bootstrap';
 
 function CreateAyudasModal() {
     const [show, setShow] = useState(false);
@@ -46,6 +44,7 @@ function CreateAyudasModal() {
                     <Modal.Title>Create Help</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+<<<<<<< HEAD:src/components/UsersComponents/CreateAyudasModal.js
                     <Form>
                     <Form.Group controlId="formBasicTitle">
                             <Form.Label>Title</Form.Label>
@@ -61,6 +60,9 @@ function CreateAyudasModal() {
                         </Form.Group>
                         
                     </Form>
+=======
+                    
+>>>>>>> juan1003-master:src/components/HelpComponents/CreateAyudasModal.js
                 </Modal.Body>
 
                 <Modal.Footer>

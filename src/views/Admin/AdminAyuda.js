@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
-import CreateAyudasModal from '../../components/UsersComponents/CreateAyudasModal';
-import EditAyudasModal from '../../components/UsersComponents/EditAyudasModal'
+import CreateAyudasModal from '../../components/HelpComponents/CreateAyudasModal'
 
 function AdminAyuda() {
     const [state, setState] = useState(undefined)

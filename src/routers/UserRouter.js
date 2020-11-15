@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 
 import { Navbar, Nav } from 'react-bootstrap';
-import Actividades from '../views/Actividades';
-import Educacion from '../views/Educacion';
-import Recursos from '../views/Recursos';
-import Ayuda from '../views/Ayuda';
-import Login from '../views/Login';
+import Actividades from '../views/RegularViews/Actividades';
+import Educacion from '../views/RegularViews/Educacion';
+import Recursos from '../views/RegularViews/Recursos';
+import Ayuda from '../views/RegularViews/Ayuda';
+import Login from '../views/RegularViews/Login';
 
 export default function UserRouter(props) {
     return (
