@@ -3,7 +3,7 @@ import Axios from 'axios';
 import {Form, Modal, Button} from 'react-bootstrap';
 import useInput from '../../hooks/useInput';
 
-function CreatePostsModal() {
+function EditPostsModal() {
     const [show, setShow] = useState(false);
     
     const [title, setTitle] = useInput("");
@@ -17,12 +17,12 @@ function CreatePostsModal() {
     const handleShow = () => setShow(true);
     const handleHide = () => setShow(false);
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event, id) => {
         event.preventDefault();
         try {
             let response = await Axios({
-                method: 'POST',
-                url: 'http://localhost:8080/user/create',
+                method: 'PUT',
+                url: 'http://localhost:8080/user/update' + id,
                 headers: {
                     token: localStorage.getItem('token')
                 },
@@ -47,10 +47,10 @@ function CreatePostsModal() {
 
     return(
         <>
-          <Button variant="outline-light" onClick={handleShow}>Create Post</Button>
+          <Button size="sm" variant="primary" onClick={handleShow}>Edit</Button>
           <Modal show={show} onHide={handleHide}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Post</Modal.Title>
+                    <Modal.Title>Edit Post</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
@@ -96,4 +96,4 @@ function CreatePostsModal() {
     );
 }
 
-export default CreatePostsModal;
+export default EditPostsModal;

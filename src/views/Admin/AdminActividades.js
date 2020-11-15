@@ -16,7 +16,7 @@ function AdminActividades() {
     async function fetchData() {
         const response = await Axios({
             method: 'GET',
-            url: "http://localhost:8080/post/",
+            url: "http://localhost:8080/actividades/",
             headers: {
                 filter: "AdminActividades"
             }
@@ -65,6 +65,10 @@ function AdminActividades() {
                                         <td>{item.body}</td>
                                         <td>{item.link}</td>
                                         <td>{item.tags}</td>
+                                        <td>
+                                            <EditActividadesModal/>
+                                            <DeleteActividadesModal/>
+                                        </td>
                                     </tr>
                                 )
                             })

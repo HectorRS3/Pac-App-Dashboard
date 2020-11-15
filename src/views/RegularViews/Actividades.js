@@ -43,13 +43,12 @@ function Actividades() {
                         {
                             state.map(item => {
                                 return (
-                                    <tr>
-                                        <td>{item.title}</td>
-                                        <td>{item.organizer}</td>
-                                        <td>{item.date}</td>
-                                        <td>{item.description}</td>
-                                        <td>{item.link}</td>
-                                    </tr>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a href={item.link} target="_blank"> {item.title}</a></h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">by {item.organizer}</h6>
+                                        <p class="card-text">{item.description}</p>
+                                        <a href="#" class="card-link">Share</a>
+                                    </div>
                                 )
                             })
                         }
@@ -60,4 +59,4 @@ function Actividades() {
     }
 }
 
-export default Actividades
+export default Actividades;

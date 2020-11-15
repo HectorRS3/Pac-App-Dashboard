@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
-import { Table, Container } from 'react-bootstrap'
+import { Navbar, Nav, Table, Container } from 'react-bootstrap'
+import CreatePostsModal from '../../components/UsersComponents/CreatePostsModal';
+import EditPostsModal from '../../components/UsersComponents/EditPostsModal'
+
 
 function AdminPosts() {
     const [state, setState] = useState(undefined)
@@ -16,6 +19,9 @@ function AdminPosts() {
         const response = await Axios({
             method: 'GET',
             url: "http://localhost:8080/post/",
+            headers: {
+                filter: "AdminPosts"
+            }
         })
 
         setState(response.data);
@@ -28,7 +34,15 @@ function AdminPosts() {
     } else {
         return (
             <Container>
-                <h1>Admin Posts</h1>
+               <Navbar bg="primary" variant="dark">
+                    <Navbar.Brand>Admin Posts</Navbar.Brand>
+                    <Nav className="mr-auto">
+                    </Nav>
+                    <Nav>
+                        <CreatePostsModal/> 
+                    </Nav>
+                </Navbar>
+
                 <Table striped hover>
                     <thead>
                         <tr>
@@ -53,6 +67,9 @@ function AdminPosts() {
                                         <td>{item.link}</td>
                                         <td>{item.tags}</td>
                                         <td>{item.category}</td>
+                                        <td>
+                                            <EditPostsModal/>
+                                        </td>
                                     </tr>
                                 )
                             })

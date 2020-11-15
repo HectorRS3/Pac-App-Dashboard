@@ -57,6 +57,9 @@ function AdminAyuda() {
                                         <td>{item.title}</td>
                                         <td>{item.number}</td>
                                         <td>{item.link}</td>
+                                        <td>
+                                            <EditAyudasModal/>
+                                        </td>
                                     </tr>
                                 )
                             })

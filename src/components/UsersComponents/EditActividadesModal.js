@@ -3,37 +3,37 @@ import Axios from 'axios';
 import {Form, Modal, Button} from 'react-bootstrap';
 import useInput from '../../hooks/useInput';
 
-function CreatePostsModal() {
+function EditActividadesModal() {
     const [show, setShow] = useState(false);
     
     const [title, setTitle] = useInput("");
     const [author, setAuthor] = useInput("");
+    const [date, setDate] = useInput("");
     const [summary, setSummary] = useInput("");
     const [body, setBody] = useInput("");
     const [link, setLink] = useInput("");
     const [tags, setTags] = useInput("");
-    const [category, setCategory] = useInput("");
-    
+
     const handleShow = () => setShow(true);
     const handleHide = () => setShow(false);
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event, id) => {
         event.preventDefault();
         try {
             let response = await Axios({
-                method: 'POST',
-                url: 'http://localhost:8080/user/create',
+                method: 'PUT',
+                url: 'http://localhost:8080/user/update/' + id,
                 headers: {
                     token: localStorage.getItem('token')
                 },
                 data: {
                     title: title,
                     author: author,
+                    date: date,
                     summary: summary,
                     body: body,
                     link: link,
-                    tags: tags,
-                    category: category
+                    tags: tags
 
                 }
             });
@@ -47,20 +47,24 @@ function CreatePostsModal() {
 
     return(
         <>
-          <Button variant="outline-light" onClick={handleShow}>Create Post</Button>
+          <Button size="ms" variant="primary" onClick={handleShow}>Edit</Button>
           <Modal show={show} onHide={handleHide}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Post</Modal.Title>
+                    <Modal.Title>Edit Activity</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                    <Form.Group controlId="formBasicTitle">
+                        <Form.Group controlId="formBasicTitle">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" name="title" placeholder="Enter Title" value={title} onChange={setTitle} />
                         </Form.Group>
                         <Form.Group controlId="formBasicAuthor">
                             <Form.Label>Author</Form.Label>
                             <Form.Control type="text" name="author" placeholder="Enter Author" value={author} onChange={setAuthor} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicDate">
+                            <Form.Label>Date</Form.Label>
+                            <Form.Control type="text" name="date" placeholder="Enter Date" value={date} onChange={setDate} />
                         </Form.Group>
                         <Form.Group controlId="formBasicSummary">
                             <Form.Label>Summary</Form.Label>
@@ -78,22 +82,17 @@ function CreatePostsModal() {
                             <Form.Label>Tags</Form.Label>
                             <Form.Control type="text" name="tags" placeholder="Enter Tags" value={tags} onChange={setTags} />
                         </Form.Group>
-                        <Form.Group controlId="formBasicCategory">
-                            <Form.Label>Category</Form.Label>
-                            <Form.Control type="text" name="category" placeholder="Enter Category" value={category} onChange={setCategory} />
-                        </Form.Group>
-                    
+
                     </Form>
                 </Modal.Body>
-                
+
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleHide}>Close</Button>
                     <Button variant="success" onClick={handleSubmit}>Save</Button>
                 </Modal.Footer>
-                
             </Modal>
         </>
     );
 }
 
-export default CreatePostsModal;
+export default EditActividadesModal;
