@@ -44,25 +44,7 @@ function CreateAyudasModal() {
                     <Modal.Title>Create Help</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-<<<<<<< HEAD:src/components/UsersComponents/CreateAyudasModal.js
-                    <Form>
-                    <Form.Group controlId="formBasicTitle">
-                            <Form.Label>Title</Form.Label>
-                            <Form.Control type="text" name="title" placeholder="Enter Title" value={title} onChange={setTitle} />
-                        </Form.Group>
-                        <Form.Group controlId="formBasicNumber">
-                            <Form.Label>Number</Form.Label>
-                            <Form.Control type="text" name="number" placeholder="Enter Number" value={number} onChange={setNumber} />
-                        </Form.Group>
-                        <Form.Group controlId="formBasicLink">
-                            <Form.Label>Link</Form.Label>
-                            <Form.Control type="text" name="link" placeholder="Enter Link" value={link} onChange={setLink} />
-                        </Form.Group>
-                        
-                    </Form>
-=======
                     
->>>>>>> juan1003-master:src/components/HelpComponents/CreateAyudasModal.js
                 </Modal.Body>
 
                 <Modal.Footer>
