@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
 import CreateAyudasModal from '../../components/HelpComponents/CreateAyudasModal'
+import EditAyudasModal from '../../components/HelpComponents/EditAyudasModal'
 
 function AdminAyuda() {
     const [state, setState] = useState(undefined)
