@@ -6,7 +6,7 @@ import {
     Redirect
 } from "react-router-dom";
 
-import { Navbar, Nav, Row, Col, Carousel } from 'react-bootstrap';
+import { Navbar, Nav, Carousel, Image } from 'react-bootstrap';
 import Actividades from '../views/RegularViews/Actividades';
 import Educacion from '../views/RegularViews/Educacion';
 import Recursos from '../views/RegularViews/Recursos';
@@ -31,41 +31,12 @@ export default function UserRouter(props) {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-            <Carousel>
-                <Carousel.Item interval={1000}>
-                    <img
-                        className="banner"
-                        src="https://images.unsplash.com/photo-1528642474498-1af0c17fd8c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-                        alt="First slide"
-                    />
-                    <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item interval={500}>
-                    <img
-                        className="banner"
-                        src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-                        alt="Third slide"
-                    />
-                    <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img
-                        className="banner"
-                        src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80"
-                        alt="Third slide"
-                    />
-                    <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </Carousel.Caption>
-                </Carousel.Item>
-            </Carousel>
+            {
+                window.location.pathname == '/login' ? <></> : 
+                <div className="banner">
+                    <Image src="https://images.unsplash.com/photo-1528642474498-1af0c17fd8c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" fluid/>
+                </div>
+            }
             <Switch>
                 <Redirect exact from="/" to="/actividades" />
                 <Route path="/actividades">
@@ -94,8 +65,7 @@ export default function UserRouter(props) {
                         </p>
 
                </div>
-                <div>
-                <h5 className="title">Links</h5>
+                <div class="footer-links">
                 <ul>
                     <li className="list-unstyled">
                         <a href="#!">Link 1</a>

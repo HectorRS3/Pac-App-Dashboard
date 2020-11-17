@@ -4,7 +4,7 @@ $primary: rebeccapurple;
 @import '~bootstrap/scss/bootstrap.scss';
 
 .navbar {
-    box-shadow: 0 2px 4px 2px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px 1px rgba(0,0,0,0.55);
 }
 
 
@@ -16,6 +16,7 @@ $primary: rebeccapurple;
 }
 
 .footer {
+    padding: 20px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,8 +32,21 @@ $primary: rebeccapurple;
     justify-content: space-between;
     align-items: center;
     width: 60%;
+    padding: 0 10px;
 }
 
+.footer-links {
+    padding-top: 10px;
+}
+
+.footer-links > ul {
+    padding: 0;  
+}
+
+.container {
+    padding: 50px 0;
+    height: 75vh;
+}
  
 .banner{
     display: flex;
@@ -40,7 +54,25 @@ $primary: rebeccapurple;
     justify-content: center;
     align-items: center;
     width: 100%;
+    padding: 0 15px;
 }
+
+.banner > img {
+    width: 56%;
+    height: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .footer-content {
+        width: 90%;
+        flex-direction: column;
+    }
+
+    .banner > img {
+        width: 100%;
+    }
+}
+
 /*
    <div className="banner">
                 <img src="#" fluid />
