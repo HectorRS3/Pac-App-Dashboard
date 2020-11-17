@@ -22,7 +22,7 @@ function CreatePostsModal() {
         try {
             let response = await Axios({
                 method: 'POST',
-                url: 'http://localhost:8080/user/create',
+                url: 'http://localhost:8080/post/create',
                 headers: {
                     token: localStorage.getItem('token')
                 },

@@ -7,8 +7,7 @@ $primary: rebeccapurple;
     box-shadow: 0 2px 4px 2px rgba(0,0,0,0.15);
 }
 
-.container{}
-.card{}
+
 
 .list-group { 
     border: 0;
@@ -17,11 +16,33 @@ $primary: rebeccapurple;
 }
 
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color:gray;
     color: white;
-    text-align: center;
+    margin-top: 20px;
   }
+
+.footer-content{
+    display: flex;
+    flex-direction: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+
+ 
+.banner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+/*
+   <div className="banner">
+                <img src="#" fluid />
+            </div>
+*/
