@@ -34,7 +34,9 @@ export default function UserRouter(props) {
             {
                 window.location.pathname == '/login' ? <></> : 
                 <div className="banner">
-                    <Image src="https://images.unsplash.com/photo-1528642474498-1af0c17fd8c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" fluid/>
+                    <a href="https://www.freepik.com/premium-photo/creative-image-many-business-people-conference-group-meeting_10506973.htm#page=1&query=banner%20image&position=8">
+                    <Image src="https://image.freepik.com/free-photo/creative-image-many-business-people-conference-group-meeting_31965-8089.jpg" fluid/>
+                    </a>
                 </div>
             }
             <Switch>

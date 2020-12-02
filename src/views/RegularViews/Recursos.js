@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Table, Container } from 'react-bootstrap'
+import CollapsableList from '../../components/Common/CollapsableList'
+
 
 function Recursos() {
     const [state, setState] = useState(undefined)
@@ -32,36 +34,8 @@ function Recursos() {
         return (
             <Container>
                 <h1>Recursos</h1>
-                <Table striped hover>
-                    <thead>
-                        <tr>
-                            <th>title</th>
-                            <th>author</th>
-                            <th>summary</th>
-                            <th>body</th>
-                            <th>link</th>
-                            <th>tags</th>
-                            <th>category</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            state.map(item => {
-                                return (
-                                    <tr>
-                                        <td>{item.title}</td>
-                                        <td>{item.author}</td>
-                                        <td>{item.summary}</td>
-                                        <td>{item.body}</td>
-                                        <td>{item.link}</td>
-                                        <td>{item.tags}</td>
-                                        <td>{item.category}</td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </Table>
+                <hr/>
+                <CollapsableList list={state} variant="primary"/>
             </Container>
         )
     }

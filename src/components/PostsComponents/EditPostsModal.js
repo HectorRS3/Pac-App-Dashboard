@@ -22,7 +22,7 @@ function EditPostsModal() {
         try {
             let response = await Axios({
                 method: 'PUT',
-                url: 'http://localhost:8080/user/update' + id,
+                url: 'http://localhost:8080/posts/update' + id,
                 headers: {
                     token: localStorage.getItem('token')
                 },

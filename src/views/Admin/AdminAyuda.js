@@ -17,10 +17,7 @@ function AdminAyuda() {
     async function fetchData() {
         const response = await Axios({
             method: 'GET',
-            url: "http://localhost:8080/ayudas/",
-            headers: {
-                filter: "AdminAyuda"
-            }
+            url: "http://localhost:8080/help/",
         })
 
         setState(response.data);

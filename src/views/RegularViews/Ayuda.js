@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-import { Table, Container } from 'react-bootstrap'
+import { Table, Container, Card } from 'react-bootstrap'
 
 function Ayuda() {
     const [state, setState] = useState(undefined)
     useEffect(() => {
-      fetchData();
-      
-      return function cleanup() {
-          console.log("Done!")
-      }
+        fetchData();
+
+        return function cleanup() {
+            console.log("Done!")
+        }
     }, [])
 
     async function fetchData() {
@@ -24,7 +24,7 @@ function Ayuda() {
         setState(response.data);
     }
 
-    if(!state) {
+    if (!state) {
         return (
             <p>LOADING...</p>
         )
@@ -32,28 +32,20 @@ function Ayuda() {
         return (
             <Container>
                 <h1>Ayuda</h1>
-                <Table striped hover>
-                    <thead>
-                        <tr>
-                            <th>title</th>
-                            <th>number</th>
-                            <th>link</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <hr/>
+                <a href="tel:787-219-4333">Topis number</a>
+                <Card>
                         {
                             state.map(item => {
                                 return (
-                                    <tr>
-                                        <td>{item.title}</td>
-                                        <td>{item.number}</td>
-                                        <td>{item.link}</td>
-                                    </tr>
+                                    <div>
+                                        <div> title: {item.title} </div>
+                                        <div> link: {item.link} </div>
+                                    </div>
                                 )
                             })
                         }
-                    </tbody>
-                </Table>
+                </Card>
             </Container>
         )
     }
