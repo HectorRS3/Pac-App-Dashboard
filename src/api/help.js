@@ -8,7 +8,7 @@ const fetchHelpList = async () => {
         }
     }
 
-    return (await fetch(`${API_URL}`, options))
+    return (await fetch(`${API_URL}`, options)).json()
 }
 
 const createHelp = async (token, title, number, link) => {
@@ -18,14 +18,14 @@ const createHelp = async (token, title, number, link) => {
             'Content-Type': 'application/json',
             token
         },
-        body: {
+        body: JSON.stringify({
             title,
             number,
             link
-        }
+        })
     }
 
-    return (await fetch(`${API_URL}/create`, options))
+    return (await fetch(`${API_URL}/create`, options)).json()
 }
 
 const updateHelp = async (token, id, title, number, link) => {
@@ -35,14 +35,14 @@ const updateHelp = async (token, id, title, number, link) => {
             'Content-Type': 'application/json',
             token
         },
-        body: {
+        body: JSON.stringify({
             title,
             number,
             link
-        }
+        })
     }
 
-    return (await fetch(`${API_URL}/update/${id}`, options))
+    return (await fetch(`${API_URL}/update/${id}`, options)).json()
 }
 
 const deleteHelp = async (token, id) => {
@@ -54,7 +54,7 @@ const deleteHelp = async (token, id) => {
         }
     }
 
-    return (await fetch(`${API_URL}/delete/${id}`))
+    return (await fetch(`${API_URL}/delete/${id}`, options)).json()
 }
 
 module.exports = {

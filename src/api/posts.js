@@ -1,6 +1,6 @@
-const API_URL = "http://localhost:8080/actividades"
+const API_URL = "http://localhost:8080/posts"
 
-const fetchEvents = async () => {
+const fetchPosts = async () => {
     const options = {
         method: 'GET',
         headers: {
@@ -11,13 +11,13 @@ const fetchEvents = async () => {
     return (await fetch(`${API_URL}`, options)).json()
 }
 
-const createEvent = async (
+const createPost = async (
     token,
     title,
-    organizer,
-    date,
-    description,
-    link
+    author,
+    summary,
+    body,
+    link,
 ) => {
     const options = {
         method: 'POST',
@@ -27,9 +27,9 @@ const createEvent = async (
         },
         body: JSON.stringify({
             title,
-            organizer,
-            date,
-            description,
+            author,
+            summary,
+            body,
             link
         })
     }
@@ -37,14 +37,14 @@ const createEvent = async (
     return (await fetch(`${API_URL}/create`, options)).json()
 }
 
-const updateEvent = async (
+const updatePost = async (
     token,
     id,
     title,
-    organizer,
-    date,
-    description,
-    link
+    author,
+    summary,
+    body,
+    link,
 ) => {
     const options = {
         method: 'PUT',
@@ -54,34 +54,34 @@ const updateEvent = async (
         },
         body: JSON.stringify({
             title,
-            organizer,
-            date,
-            description,
-            link
+            author,
+            summary,
+            body,
+            link,
         })
     }
 
     return (await fetch(`${API_URL}/update/${id}`, options)).json()
 }
 
-const deleteEvent = async (
-    token, 
+const deletePost = async (
+    token,
     id
 ) => {
     const options = {
         method: 'DELETE',
         headers: {
-            'Content-Type': 'applicationj/json',
+            'Content-Type': 'application/json',
             token
         }
     }
 
-    return(await fetch(`${API_URL}/delete/${id}`, options)).json()
+    return (await fetch(`${API_URL}/delete/${id}`, options)).json()
 }
 
 module.exports = {
-    fetchEvents,
-    createEvent,
-    updateEvent,
-    deleteEvent
+    fetchPosts,
+    createPost,
+    updatePost,
+    deletePost
 }
