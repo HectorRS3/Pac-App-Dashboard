@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/actividades"
+const EVENTS_ENDPOINT = "/actividades"
 
 const fetchEvents = async () => {
     const options = {
@@ -8,7 +8,7 @@ const fetchEvents = async () => {
         }
     }
 
-    return (await fetch(`${API_URL}`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${EVENTS_ENDPOINT}`, options)).json()
 }
 
 const createEvent = async (
@@ -34,7 +34,7 @@ const createEvent = async (
         })
     }
 
-    return (await fetch(`${API_URL}/create`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${EVENTS_ENDPOINT}/create`, options)).json()
 }
 
 const updateEvent = async (
@@ -61,7 +61,7 @@ const updateEvent = async (
         })
     }
 
-    return (await fetch(`${API_URL}/update/${id}`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${EVENTS_ENDPOINT}/update/${id}`, options)).json()
 }
 
 const deleteEvent = async (
@@ -76,7 +76,7 @@ const deleteEvent = async (
         }
     }
 
-    return(await fetch(`${API_URL}/delete/${id}`, options)).json()
+    return(await fetch(`${process.env.API_ROOT_URL}/${EVENTS_ENDPOINT}/delete/${id}`, options)).json()
 }
 
 module.exports = {

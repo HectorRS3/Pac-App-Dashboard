@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/posts"
+const POSTS_ENDPOINT = "/posts"
 
 const fetchPosts = async () => {
     const options = {
@@ -8,7 +8,7 @@ const fetchPosts = async () => {
         }
     }
 
-    return (await fetch(`${API_URL}`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${POSTS_ENDPOINT}`, options)).json()
 }
 
 const createPost = async (
@@ -34,7 +34,7 @@ const createPost = async (
         })
     }
 
-    return (await fetch(`${API_URL}/create`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${POSTS_ENDPOINT}/create`, options)).json()
 }
 
 const updatePost = async (
@@ -61,7 +61,7 @@ const updatePost = async (
         })
     }
 
-    return (await fetch(`${API_URL}/update/${id}`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${POSTS_ENDPOINT}/update/${id}`, options)).json()
 }
 
 const deletePost = async (
@@ -76,7 +76,7 @@ const deletePost = async (
         }
     }
 
-    return (await fetch(`${API_URL}/delete/${id}`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${POSTS_ENDPOINT}/delete/${id}`, options)).json()
 }
 
 module.exports = {

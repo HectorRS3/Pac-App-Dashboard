@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/user"
+const USER_ENDPOINT = "/user"
 
 const fetchUsers = async ( token ) => {
     const options = {
@@ -9,7 +9,7 @@ const fetchUsers = async ( token ) => {
         }
     }
 
-    return (await fetch(`${API_URL}/`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${USER_ENDPOINT}/`, options)).json()
 }
 
 const createUser = async ( token, firstName, lastName, username, password ) => {
@@ -27,7 +27,7 @@ const createUser = async ( token, firstName, lastName, username, password ) => {
         })
     }
 
-    return (await fetch(`${API_URL}/create`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${USER_ENDPOINT}/create`, options)).json()
 }
 
 const updateUser = async ( token, id, firstName, lastName, username ) => {
@@ -44,7 +44,7 @@ const updateUser = async ( token, id, firstName, lastName, username ) => {
         })
     }
 
-    return (await fetch(`${API_URL}/update/${id}`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${USER_ENDPOINT}/update/${id}`, options)).json()
 }
 
 const deleteUser =  async ( token, id ) => {
@@ -56,7 +56,7 @@ const deleteUser =  async ( token, id ) => {
         }
     }
 
-    return (await fetch(`${API_URL}/delete/${id}`, options)).json()
+    return (await fetch(`${process.env.API_ROOT_URL}/${USER_ENDPOINT}/delete/${id}`, options)).json()
 }
 
 module.exports = {
