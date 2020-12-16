@@ -1,6 +1,12 @@
 # Pac App
 ## Alzheimer Caregiver App
 
+To download the code, execute the following script:
+
+```shell
+$ git clone https://github.com/HectorRS3/Pac-App-Dashboard.git
+```
+
 You should create a .env file with the following variables
 
 - API_ROOT_URL
