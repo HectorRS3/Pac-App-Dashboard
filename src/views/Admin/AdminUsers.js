@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
 
-import { fetchUsers } from "../../api/users";
+import { UsersAPI } from "../../api";
 
 import CreateUserModal from '../../components/UsersComponents/CreateUserModal';
 import EditUserModal from '../../components/UsersComponents/EditUserModal';
@@ -10,7 +10,7 @@ import DeleteUserModal from '../../components/UsersComponents/DeleteUserModal';
 function AdminActividades(props) {
     const [state, setState] = useState(undefined)
     useEffect(async () => {
-        const users = await fetchUsers(localStorage.getItem('token'))
+        const users = await UsersAPI().fetchUsers(localStorage.getItem('token'))
         setState(users)
         return function cleanup() {
             console.log("Done!")

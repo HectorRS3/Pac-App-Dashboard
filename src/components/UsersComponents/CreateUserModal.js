@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { Form, Modal, Button } from 'react-bootstrap';
 import useInput from '../../hooks/useInput';
-import { createUser } from '../../api/users';
+import { UsersAPI } from '../../api/';
 
 function CreateUserModal() {
     const [show, setShow] = useState(false);
@@ -18,13 +18,15 @@ function CreateUserModal() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const {message} = await createUser(
-                localStorage.getItem('token'), 
+
+            const user = {
                 firstName, 
                 lastName, 
                 username, 
                 password
-            )
+            }
+
+            const {message} = await UsersAPI().createUser(user)
 
             window.alert(message)
             window.location.reload()
