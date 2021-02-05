@@ -1,65 +1,64 @@
-const HELP_ENDPOINT = "/help"
+const API_URL = process.env.API_ROOT_URL
 
-const fetchHelpList = async () => {
-    const options = {
-        method: 'GET',
-        headers: {
+export default function HelpAPI() {
+  const getHelpList = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
+
+        const response = await fetch(`${API_URL}/ayudas`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const submitHelp = help => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
+          },
+          body: JSON.stringify(help)
+        }
+
+        const response = await fetch(`${API_URL}/ayudas/create`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const deleteHelp = id => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'DELETE',
+          headers: {
             'Content-Type': 'application/json'
+          }
         }
-    }
 
-    return (await fetch(`${process.env.API_ROOT_URL}/${HELP_ENDPOINT}`, options)).json()
-}
+        const response = await fetch(`${API_URL}/ayudas/delete/${id}`, options)
 
-const createHelp = async (token, title, number, link) => {
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            token
-        },
-        body: JSON.stringify({
-            title,
-            number,
-            link
-        })
-    }
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
 
-    return (await fetch(`${process.env.API_ROOT_URL}/${HELP_ENDPOINT}/create`, options)).json()
-}
-
-const updateHelp = async (token, id, title, number, link) => {
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            token
-        },
-        body: JSON.stringify({
-            title,
-            number,
-            link
-        })
-    }
-
-    return (await fetch(`${process.env.API_ROOT_URL}/${HELP_ENDPOINT}/update/${id}`, options)).json()
-}
-
-const deleteHelp = async (token, id) => {
-    const options = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            token
-        }
-    }
-
-    return (await fetch(`${process.env.API_ROOT_URL}/${HELP_ENDPOINT}/delete/${id}`, options)).json()
-}
-
-module.exports = {
-    fetchHelpList,
-    createHelp,
-    updateHelp,
-    deleteHelp
+  return { getHelpList, submitHelp, deleteHelp }
 }

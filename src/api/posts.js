@@ -1,87 +1,107 @@
-const POSTS_ENDPOINT = "/posts"
+const API_URL = process.env.API_ROOT_URL
 
-const fetchPosts = async () => {
-    const options = {
-        method: 'GET',
-        headers: {
+export default function PostsAPI() {
+  const fetchPosts = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
+
+        const response = await fetch(`${API_URL}/post`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const getPostById = id => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
             'Content-Type': 'application/json'
+          }
         }
-    }
 
-    return (await fetch(`${process.env.API_ROOT_URL}/${POSTS_ENDPOINT}`, options)).json()
-}
+        const response = await fetch(`${API_URL}/post/${id}`, options)
 
-const createPost = async (
-    token,
-    title,
-    author,
-    summary,
-    body,
-    link,
-) => {
-    const options = {
-        method: 'POST',
-        headers: {
+        resolve(response.json())
+
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const updatePost = (id, post) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'PUT',
+          headers: {
             'Content-Type': 'application/json',
-            token
-        },
-        body: JSON.stringify({
-            title,
-            author,
-            summary,
-            body,
-            link
-        })
-    }
-
-    return (await fetch(`${process.env.API_ROOT_URL}/${POSTS_ENDPOINT}/create`, options)).json()
-}
-
-const updatePost = async (
-    token,
-    id,
-    title,
-    author,
-    summary,
-    body,
-    link,
-) => {
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            token
-        },
-        body: JSON.stringify({
-            title,
-            author,
-            summary,
-            body,
-            link,
-        })
-    }
-
-    return (await fetch(`${process.env.API_ROOT_URL}/${POSTS_ENDPOINT}/update/${id}`, options)).json()
-}
-
-const deletePost = async (
-    token,
-    id
-) => {
-    const options = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            token
+            token: localStorage.getItem('token')
+          },
+          body: JSON.stringify(post)
         }
-    }
 
-    return (await fetch(`${process.env.API_ROOT_URL}/${POSTS_ENDPOINT}/delete/${id}`, options)).json()
-}
+        const response = await fetch(`${API_URL}/post/update/${id}`, options)
 
-module.exports = {
-    fetchPosts,
-    createPost,
-    updatePost,
-    deletePost
+        resolve(response.json())
+
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const publishPost = post => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
+          },
+          body: JSON.stringify(post)
+        }
+
+        const response = await fetch(`${API_URL}/post/create`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const deletePost = id => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
+          }
+        }
+
+        const response = await fetch(`${API_URL}/post/delete/${id}`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  return { fetchPosts, getPostById, publishPost, updatePost, deletePost }
 }

@@ -1,87 +1,105 @@
-const EVENTS_ENDPOINT = "/actividades"
+const API_URL = process.env.API_ROOT_URL
 
-const fetchEvents = async () => {
-    const options = {
-        method: 'GET',
-        headers: {
+export default function EventsAPI() {
+  const fetchEvents = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
             'Content-Type': 'application/json'
+          }
         }
-    }
 
-    return (await fetch(`${process.env.API_ROOT_URL}/${EVENTS_ENDPOINT}`, options)).json()
-}
+        const response = await fetch(`${API_URL}/actividades`, options)
 
-const createEvent = async (
-    token,
-    title,
-    organizer,
-    date,
-    description,
-    link
-) => {
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            token
-        },
-        body: JSON.stringify({
-            title,
-            organizer,
-            date,
-            description,
-            link
-        })
-    }
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
 
-    return (await fetch(`${process.env.API_ROOT_URL}/${EVENTS_ENDPOINT}/create`, options)).json()
-}
-
-const updateEvent = async (
-    token,
-    id,
-    title,
-    organizer,
-    date,
-    description,
-    link
-) => {
-    const options = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            token
-        },
-        body: JSON.stringify({
-            title,
-            organizer,
-            date,
-            description,
-            link
-        })
-    }
-
-    return (await fetch(`${process.env.API_ROOT_URL}/${EVENTS_ENDPOINT}/update/${id}`, options)).json()
-}
-
-const deleteEvent = async (
-    token, 
-    id
-) => {
-    const options = {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'applicationj/json',
-            token
+  const getEventById = id => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
         }
-    }
 
-    return(await fetch(`${process.env.API_ROOT_URL}/${EVENTS_ENDPOINT}/delete/${id}`, options)).json()
-}
+        const response = await fetch(`${API_URL}/actividades/${id}`, options)
 
-module.exports = {
-    fetchEvents,
-    createEvent,
-    updateEvent,
-    deleteEvent
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const createEvent = event => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
+          },
+          body: JSON.stringify(event)
+        }
+
+        const response = await fetch(`${API_URL}/actividades/create`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const updateEvent = (id, event) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
+          },
+          body: JSON.stringify(event)
+        }
+
+        const response = await fetch(`${API_URL}/actividades/${id}`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  const removeEvent = id => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
+          }
+        }
+
+        const response = await fetch(`${API_URL}/actividades/${id}`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  return { fetchEvents, getEventById, createEvent, updateEvent, removeEvent }
 }
