@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, ListGroup, Card } from 'react-bootstrap'
 import EventDetailsModal from '../../components/EventComponents/EventDetailsModal'
 import { EventsAPI } from '../../api/'
-import 'react-calendar/dist/Calendar.css'
 
 function Actividades() {
   const [upcomingEvents, setUpcomingEvents] = useState([])
@@ -77,7 +76,7 @@ function Actividades() {
                     upcomingEvents.map((upcoming, index) => {
                       return ( <ListGroup.Item key={index} action onClick={() => getEventDetails(upcoming.id)}>
                       <div className="date-block">
-                        <h4>{new Date(upcoming.date).getDay()}</h4>
+                        <h4>{new Date(upcoming.date).getDate() + 1}</h4>
                         <span>{ monthNames[new Date(upcoming.date).getMonth()] }</span>
                       </div>
                       <div className="description-block">
@@ -107,7 +106,7 @@ function Actividades() {
                     pastEvents.map((past, index) => {
                       return (<ListGroup.Item key={index} action onClick={() => getEventDetails(past.id)}>
                       <div className="date-block">
-                        <h4>{new Date(past.date).getDay()}</h4>
+                        <h4>{new Date(past.date).getDate() + 1}</h4>
                         <span>{ monthNames[new Date(past.date).getMonth()] }</span>
                       </div>
                       <div className="description-block">

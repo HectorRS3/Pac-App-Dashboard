@@ -9,7 +9,7 @@ function EventDetailsModal({isOpen, setIsOpen, event }) {
     </Modal.Header>
     <Modal.Body>
       <p>
-      When: {new Date(event.date).getMonth() + 1}/{new Date(event.date).getDay()}/{new Date(event.date).getUTCFullYear()}
+      When: {new Date(event.date).getMonth() + 1}/{new Date(event.date).getDate() + 1}/{new Date(event.date).getUTCFullYear()}
       </p>
       <p>Organized by: {event.organizer}</p>
       <p>{event.description}</p>
