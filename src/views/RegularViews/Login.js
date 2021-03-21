@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom"
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 import { UsersAPI } from "../../api"
 
@@ -22,7 +21,7 @@ export default function Login() {
     try {
       evt.preventDefault();
 
-      const history = useHistory
+      const history = window.location
 
       const response = await UsersAPI().login(user.username, user.password)
 
@@ -30,7 +29,7 @@ export default function Login() {
 
       if (response.pass) {
         localStorage.setItem('token', response.token);
-        history.push('/admin/users');
+        history.replace('/admin/users');
       } else {
         alert(response.message)
       }
@@ -41,23 +40,39 @@ export default function Login() {
 
   return (
     <Container>
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Username</Form.Label>
-          <Form.Control type="text" name="username" placeholder="Enter Username" value={user.username} onChange={handleChange} />
-          <Form.Text className="text-muted">
-            We'll never share your username with anyone else.
+      <Row>
+        <Col md={{
+          offset: 3,
+          span: 4
+        }}>
+          <Card>
+            <Card.Header>
+              <Card.Title>
+                Login to Pac App
+              </Card.Title>
+            </Card.Header>
+            <Card.Body>
+              <Form>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control type="text" name="username" placeholder="Enter Username" value={user.username} onChange={handleChange} />
+                  <Form.Text className="text-muted">
+                    We'll never share your username with anyone else.
                     </Form.Text>
-        </Form.Group>
+                </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange} />
-        </Form.Group>
-        <Button variant="primary" type="submit" onClick={handleLogin}>
-          Submit
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" name="password" placeholder="Password" value={user.password} onChange={handleChange} />
+                </Form.Group>
+                <Button variant="primary" type="submit" onClick={handleLogin}>
+                  Submit
                 </Button>
-      </Form>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </Container>
   );
 }
