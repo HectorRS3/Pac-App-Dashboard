@@ -1,20 +1,13 @@
 import React from 'react';
-import Axios from 'axios';
 import { Button } from 'react-bootstrap';
+import { EventsAPI } from '../../api';
 
-function DeleteActividadesButton(id) {
+function DeleteActividadesButton({ eventId }) {
     async function DELETEDIS(event) {
         try {
             event.preventDefault();
-            const response = await Axios({
-                method: 'DELETE',
-                url: 'http://localhost:8080/user/delete/' + id,
-                headers: {
-                    token: localStorage.getItem('token')
-                }
-            });
-
-            window.alert(response.data.message);
+            const response = await EventsAPI().removeEvent(eventId);
+            window.alert(response.message);
             window.location.reload();
         } catch (error) {
             console.error(error.message, error.stack);
@@ -22,7 +15,7 @@ function DeleteActividadesButton(id) {
     }
 
     return(
-          <Button size="ms" variant="danger" onClick={DELETEDIS}>Delete</Button>
+          <Button variant="danger" onClick={DELETEDIS}>Delete</Button>
     );
 }
 

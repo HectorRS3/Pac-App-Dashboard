@@ -1,45 +1,32 @@
 import React, {useState} from 'react';
-import Axios from 'axios';
 import {Form, Modal, Button} from 'react-bootstrap';
 import useInput from '../../hooks/useInput';
+import { EventsAPI } from'../../api/'
 
-function EditActividadesModal() {
+function EditActividadesModal({ eventId }) {
     const [show, setShow] = useState(false);
     
     const [title, setTitle] = useInput("");
-    const [author, setAuthor] = useInput("");
+    const [organizer, setOrganizer] = useInput("");
     const [date, setDate] = useInput("");
-    const [summary, setSummary] = useInput("");
-    const [body, setBody] = useInput("");
+    const [description, setDescription] = useInput("");
     const [link, setLink] = useInput("");
-    const [tags, setTags] = useInput("");
 
     const handleShow = () => setShow(true);
     const handleHide = () => setShow(false);
 
-    const handleSubmit = async (event, id) => {
-        event.preventDefault();
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
         try {
-            let response = await Axios({
-                method: 'PUT',
-                url: 'http://localhost:8080/user/update/' + id,
-                headers: {
-                    token: localStorage.getItem('token')
-                },
-                data: {
-                    title: title,
-                    author: author,
-                    date: date,
-                    summary: summary,
-                    body: body,
-                    link: link,
-                    tags: tags
-
-                }
-            });
-    
-            window.alert(response.data.message)
-            window.location.reload()
+            const event = {
+                title,
+                organizer,
+                date,
+                description,
+                link
+            }
+            await EventsAPI().updateEvent(eventId, event);
+            window.location.reload();
         } catch(error) {
             window.console.log(error.message, error.stack)
         }
@@ -47,7 +34,7 @@ function EditActividadesModal() {
 
     return(
         <>
-          <Button size="ms" variant="primary" onClick={handleShow}>Edit</Button>
+          <Button size="sm" variant="primary" onClick={handleShow}>Edit</Button>
           <Modal show={show} onHide={handleHide}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Activity</Modal.Title>
@@ -59,33 +46,23 @@ function EditActividadesModal() {
                             <Form.Control type="text" name="title" placeholder="Enter Title" value={title} onChange={setTitle} />
                         </Form.Group>
                         <Form.Group controlId="formBasicAuthor">
-                            <Form.Label>Author</Form.Label>
-                            <Form.Control type="text" name="author" placeholder="Enter Author" value={author} onChange={setAuthor} />
+                            <Form.Label>Organizer</Form.Label>
+                            <Form.Control type="text" name="organizer" placeholder="Enter Organizer" value={organizer} onChange={setOrganizer} />
                         </Form.Group>
                         <Form.Group controlId="formBasicDate">
                             <Form.Label>Date</Form.Label>
-                            <Form.Control type="text" name="date" placeholder="Enter Date" value={date} onChange={setDate} />
+                            <Form.Control type="date" name="date" placeholder="Enter Date" value={date} onChange={setDate} />
                         </Form.Group>
                         <Form.Group controlId="formBasicSummary">
-                            <Form.Label>Summary</Form.Label>
-                            <Form.Control type="text" name="summary" placeholder="Enter Summary" value={summary} onChange={setSummary} />
-                        </Form.Group>
-                        <Form.Group controlId="formBasicBody">
-                            <Form.Label>Body</Form.Label>
-                            <Form.Control type="text" name="body" placeholder="Enter Body" value={body} onChange={setBody} />
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control type="text" name="description" placeholder="Enter Description" value={description} onChange={setDescription} />
                         </Form.Group>
                         <Form.Group controlId="formBasicLink">
                             <Form.Label>Link</Form.Label>
                             <Form.Control type="text" name="link" placeholder="Enter Link" value={link} onChange={setLink} />
                         </Form.Group>
-                        <Form.Group controlId="formBasicTags">
-                            <Form.Label>Tags</Form.Label>
-                            <Form.Control type="text" name="tags" placeholder="Enter Tags" value={tags} onChange={setTags} />
-                        </Form.Group>
-
                     </Form>
                 </Modal.Body>
-
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleHide}>Close</Button>
                     <Button variant="success" onClick={handleSubmit}>Save</Button>

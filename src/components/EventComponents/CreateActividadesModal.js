@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import Axios from 'axios';
 import {Form, Modal, Button} from 'react-bootstrap';
+import { EventsAPI } from '../../api'
 import useInput from '../../hooks/useInput';
 
 function CreateActividadesModal() {
@@ -9,10 +9,8 @@ function CreateActividadesModal() {
     const [title, setTitle] = useInput("");
     const [author, setAuthor] = useInput("");
     const [date, setDate] = useInput("");
-    const [summary, setSummary] = useInput("");
-    const [body, setBody] = useInput("");
+    const [description, setDescription] = useInput("");
     const [link, setLink] = useInput("");
-    const [tags, setTags] = useInput("");
 
     const handleShow = () => setShow(true);
     const handleHide = () => setShow(false);
@@ -20,25 +18,14 @@ function CreateActividadesModal() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            let response = await Axios({
-                method: 'POST',
-                url: 'http://localhost:8080/user/create',
-                headers: {
-                    token: localStorage.getItem('token')
-                },
-                data: {
-                    title: title,
-                    author: author,
-                    date: date,
-                    summary: summary,
-                    body: body,
-                    link: link,
-                    tags: tags
-
-                }
-            });
-    
-            window.alert(response.data.message)
+            const event = {
+                title,
+                organizer: author,
+                date,
+                description,
+                link
+            }
+            await EventsAPI().createEvent(event)
             window.location.reload()
         } catch(error) {
             window.console.log(error.message, error.stack)
@@ -64,25 +51,16 @@ function CreateActividadesModal() {
                         </Form.Group>
                         <Form.Group controlId="formBasicDate">
                             <Form.Label>Date</Form.Label>
-                            <Form.Control type="text" name="date" placeholder="Enter Date" value={date} onChange={setDate} />
+                            <Form.Control type="date" name="date" placeholder="Enter Date" value={date} onChange={setDate} />
                         </Form.Group>
                         <Form.Group controlId="formBasicSummary">
-                            <Form.Label>Summary</Form.Label>
-                            <Form.Control type="text" name="summary" placeholder="Enter Summary" value={summary} onChange={setSummary} />
-                        </Form.Group>
-                        <Form.Group controlId="formBasicBody">
-                            <Form.Label>Body</Form.Label>
-                            <Form.Control type="text" name="body" placeholder="Enter Body" value={body} onChange={setBody} />
+                            <Form.Label>Description</Form.Label>
+                            <Form.Control type="text" name="description" placeholder="Enter Description" value={description} onChange={setDescription} />
                         </Form.Group>
                         <Form.Group controlId="formBasicLink">
                             <Form.Label>Link</Form.Label>
                             <Form.Control type="text" name="link" placeholder="Enter Link" value={link} onChange={setLink} />
                         </Form.Group>
-                        <Form.Group controlId="formBasicTags">
-                            <Form.Label>Tags</Form.Label>
-                            <Form.Control type="text" name="tags" placeholder="Enter Tags" value={tags} onChange={setTags} />
-                        </Form.Group>
-
                     </Form>
                 </Modal.Body>
 

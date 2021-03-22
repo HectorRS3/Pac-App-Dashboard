@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
 import CreateActividadesModal from '../../components/EventComponents/CreateActividadesModal'
 import EditActividadesModal from '../../components/EventComponents/EditActividadesModal'
 import DeleteActividadesModal from '../../components/EventComponents/DeleteActividadesModal'
+import { EventsAPI } from '../../api'
 
 function AdminActividades() {
     const [state, setState] = useState(undefined)
@@ -16,15 +16,12 @@ function AdminActividades() {
     }, [])
 
     async function fetchData() {
-        const response = await Axios({
-            method: 'GET',
-            url: "http://localhost:8080/actividades/",
-            headers: {
-                filter: "AdminActividades"
-            }
-        })
-
-        setState(response.data);
+        try {
+            const response = await EventsAPI().fetchEvents()
+            setState(response);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     if(!state) {
@@ -47,12 +44,10 @@ function AdminActividades() {
                     <thead>
                         <tr>
                             <th>title</th>
-                            <th>author</th>
-                            <th>Date</th>
-                            <th>summary</th>
-                            <th>body</th>
+                            <th>organizer</th>
+                            <th>date</th>
+                            <th>description</th>
                             <th>link</th>
-                            <th>tags</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,15 +56,13 @@ function AdminActividades() {
                                 return (
                                     <tr>
                                         <td>{item.title}</td>
-                                        <td>{item.author}</td>
+                                        <td>{item.organizer}</td>
                                         <td>{item.date}</td>
-                                        <td>{item.summary}</td>
-                                        <td>{item.body}</td>
+                                        <td>{item.description}</td>
                                         <td>{item.link}</td>
-                                        <td>{item.tags}</td>
                                         <td>
-                                            <EditActividadesModal/>
-                                            <DeleteActividadesModal/>
+                                            <EditActividadesModal eventId={item.id}/>
+                                            <DeleteActividadesModal eventId={item.id} eventTitle={item.title}/>
                                         </td>
                                     </tr>
                                 )

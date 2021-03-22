@@ -72,7 +72,7 @@ export default function EventsAPI() {
           body: JSON.stringify(event)
         }
 
-        const response = await fetch(`${API_URL}/actividades/${id}`, options)
+        const response = await fetch(`${API_URL}/actividades/update/${id}`, options)
 
         resolve(response.json())
       } catch (error) {
@@ -92,7 +92,7 @@ export default function EventsAPI() {
           }
         }
 
-        const response = await fetch(`${API_URL}/actividades/${id}`, options)
+        const response = await fetch(`${API_URL}/actividades/delete/${id}`, options)
 
         resolve(response.json())
       } catch (error) {
