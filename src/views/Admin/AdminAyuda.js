@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
 import CreateHelpModal from '../../components/HelpComponents/CreateHelpModal'
 import EditHelpModal from '../../components/HelpComponents/EditHelpModal'
+import DeleteHelpModal from '../../components/HelpComponents/DeleteHelpModal'
+import { HelpAPI } from '../../api'
 
 function AdminAyuda() {
     const [state, setState] = useState(undefined)
@@ -15,12 +16,8 @@ function AdminAyuda() {
     }, [])
 
     async function fetchData() {
-        const response = await Axios({
-            method: 'GET',
-            url: "http://localhost:8080/ayudas/",
-        })
-
-        setState(response.data);
+        const response = await HelpAPI().getHelpList();
+        setState(response);
     }
 
     if(!state) {
@@ -43,7 +40,7 @@ function AdminAyuda() {
                     <thead>
                         <tr>
                             <th>title</th>
-                            <th>number</th>
+                            <th>phone number</th>
                             <th>link</th>
                         </tr>
                     </thead>
@@ -53,10 +50,11 @@ function AdminAyuda() {
                                 return (
                                     <tr>
                                         <td>{item.title}</td>
-                                        <td>{item.number}</td>
+                                        <td>{item.phone_number}</td>
                                         <td>{item.link}</td>
                                         <td>
-                                            <EditHelpModal/>
+                                            <EditHelpModal helpId={item.id}/>
+                                            <DeleteHelpModal helpId={item.id} helpTitle={item.title} />
                                         </td>
                                     </tr>
                                 )

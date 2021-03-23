@@ -18,10 +18,10 @@ function EditHelpModal({helpId}) {
         try {
             const help = {
                 title,
-                number,
+                phone_number: number,
                 link
             }
-            await HelpAPI().updateHelp(helpId, help);
+            await HelpAPI().editHelp(helpId, help);
             window.location.reload();
         } catch(error) {
             window.console.log(error.message, error.stack)
@@ -30,7 +30,7 @@ function EditHelpModal({helpId}) {
 
     return(
         <>
-          <Button size="ms" variant="primary" onClick={handleShow}>Edit</Button>
+          <Button size="sm" variant="primary" onClick={handleShow}>Edit</Button>
           <Modal show={show} onHide={handleHide}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Help</Modal.Title>

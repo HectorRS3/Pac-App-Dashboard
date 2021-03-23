@@ -41,13 +41,35 @@ export default function HelpAPI() {
     })
   }
 
+  const editHelp = (id, help) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
+          },
+          body: JSON.stringify(help)
+        }
+
+        const response = await fetch(`${API_URL}/ayudas/update/${id}`, options)
+
+        resolve(response.json())
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
   const deleteHelp = id => {
     return new Promise(async (resolve, reject) => {
       try {
         const options = {
           method: 'DELETE',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('token')
           }
         }
 
@@ -60,5 +82,5 @@ export default function HelpAPI() {
     })
   }
 
-  return { getHelpList, submitHelp, deleteHelp }
+  return { getHelpList, submitHelp, editHelp,  deleteHelp }
 }

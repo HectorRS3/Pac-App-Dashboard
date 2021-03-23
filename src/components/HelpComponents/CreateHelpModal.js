@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
 import { Form, Modal, Button } from 'react-bootstrap';
 import useInput from '../../hooks/useInput';
+import { HelpAPI } from '../../api'
 
 function CreateHelpModal() {
     const [show, setShow] = useState(false);
@@ -10,27 +10,21 @@ function CreateHelpModal() {
     const [number, setNumber] = useInput("");
     const [link, setLink] = useInput("");
 
-
     const handleShow = () => setShow(true);
     const handleHide = () => setShow(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            let response = await Axios({
-                method: 'POST',
-                url: 'http://localhost:8080/ayudas/create',
-                headers: {
-                    token: localStorage.getItem('token')
-                },
-                data: {
-                    title: title,
-                    number: number,
-                    link: link
-                }
-            });
+            const help ={
+                title,
+                phone_number: number,
+                link
+            }
 
-            window.alert(response.data.message)
+            let response = await HelpAPI().submitHelp(help)
+
+            window.alert(response.message)
             window.location.reload()
         } catch (error) {
             window.console.log(error.message, error.stack)

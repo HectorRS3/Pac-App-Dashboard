@@ -3,10 +3,10 @@ import { Button } from 'react-bootstrap';
 import { HelpAPI } from '../../api';
 
 function DeleteHelpButton({ helpId }) {
-    async function DELETEDIS(help) {
+    async function DELETEDIS(event) {
         try {
-            help.preventDefault();
-            const response = await HelpAPI().removeHelp(helpId);
+            event.preventDefault();
+            const response = await HelpAPI().deleteHelp(helpId);
             window.alert(response.message);
             window.location.reload();
         } catch (error) {
