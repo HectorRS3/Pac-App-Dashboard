@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import Axios from 'axios'
 import { Container, Col, Row, Card} from 'react-bootstrap'
 import CollapsableList from '../../components/Common/CollapsableList'
+import { PostsAPI } from '../../api'
 
 function Educacion() {
     const [state, setState] = useState(undefined)
@@ -14,12 +14,18 @@ function Educacion() {
     }, [])
 
     async function fetchData() {
-        const response = await Axios({
-            method: 'GET',
-            url: "http://localhost:8080/post/"
-        })
+        let posts = [];
+        const response = await PostsAPI().fetchPosts();
 
-        setState(response.data);
+        console.log(response)
+
+        // response.map(post => {
+        //     let tags = [];
+        //     const strToArr = post.tags !== "" || post.tags !== undefined ? post.tags.split(',', post.tags) : post.tags
+        //     console.log(strToArr)
+        // })
+
+        setState(response);
     }
 
     if(!state) {

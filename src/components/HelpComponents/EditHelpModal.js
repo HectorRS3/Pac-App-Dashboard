@@ -1,42 +1,32 @@
 import React, {useState} from 'react';
-import Axios from 'axios';
+import { HelpAPI } from'../../api/';
 import {Form, Modal, Button} from 'react-bootstrap';
 import useInput from '../../hooks/useInput';
 
-function EditAyudasModal() {
+function EditHelpModal({helpId}) {
     const [show, setShow] = useState(false);
 
     const [title, setTitle] = useInput("");
     const [number, setNumber] = useInput("");
     const [link, setLink] = useInput("");
 
-    
     const handleShow = () => setShow(true);
     const handleHide = () => setShow(false);
 
-    const handleSubmit = async (event, id) => {
-        event.preventDefault();
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
         try {
-            let response = await Axios({
-                method: 'PUT',
-                url: 'http://localhost:8080/user/update' + id,
-                headers: {
-                    token: localStorage.getItem('token')
-                },
-                data: {
-                    title: title,
-                    number: number,
-                    link: link
-                }
-            });
-    
-            window.alert(response.data.message)
-            window.location.reload()
+            const help = {
+                title,
+                number,
+                link
+            }
+            await HelpAPI().updateHelp(helpId, help);
+            window.location.reload();
         } catch(error) {
             window.console.log(error.message, error.stack)
         }
     }
-
 
     return(
         <>
@@ -58,8 +48,7 @@ function EditAyudasModal() {
                         <Form.Group controlId="formBasicLink">
                             <Form.Label>Link</Form.Label>
                             <Form.Control type="text" name="link" placeholder="Enter Link" value={link} onChange={setLink} />
-                        </Form.Group>
-                        
+                        </Form.Group>          
                     </Form>
                 </Modal.Body>
 
@@ -72,4 +61,4 @@ function EditAyudasModal() {
     );
 }
 
-export default EditAyudasModal;
+export default EditHelpModal;

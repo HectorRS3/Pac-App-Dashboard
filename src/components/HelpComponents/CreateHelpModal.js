@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Axios from 'axios';
-
-import {Modal, Button} from 'react-bootstrap';
+import { Form, Modal, Button } from 'react-bootstrap';
 import useInput from '../../hooks/useInput';
 
-function CreateAyudasModal() {
+function CreateHelpModal() {
     const [show, setShow] = useState(false);
 
     const [title, setTitle] = useInput("");
     const [number, setNumber] = useInput("");
     const [link, setLink] = useInput("");
 
-    
+
     const handleShow = () => setShow(true);
     const handleHide = () => setShow(false);
 
@@ -20,7 +19,7 @@ function CreateAyudasModal() {
         try {
             let response = await Axios({
                 method: 'POST',
-                url: 'http://localhost:8080/user/create',
+                url: 'http://localhost:8080/ayudas/create',
                 headers: {
                     token: localStorage.getItem('token')
                 },
@@ -30,24 +29,37 @@ function CreateAyudasModal() {
                     link: link
                 }
             });
-    
+
             window.alert(response.data.message)
             window.location.reload()
-        } catch(error) {
+        } catch (error) {
             window.console.log(error.message, error.stack)
         }
     }
 
 
-    return(
+    return (
         <>
-          <Button variant="outline-light" onClick={handleShow}>Create Help</Button>
-          <Modal show={show} onHide={handleHide}>
+            <Button variant="outline-light" onClick={handleShow}>Create Help</Button>
+            <Modal show={show} onHide={handleHide}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create Help</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    
+                    <Form>
+                        <Form.Group controlId="formBasicTitle">
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text" name="title" placeholder="Enter Title" value={title} onChange={setTitle} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicNumber">
+                            <Form.Label>Number</Form.Label>
+                            <Form.Control type="text" name="number" placeholder="Enter Number" value={number} onChange={setNumber} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicLink">
+                            <Form.Label>Link</Form.Label>
+                            <Form.Control type="text" name="link" placeholder="Enter Link" value={link} onChange={setLink} />
+                        </Form.Group>
+                    </Form>
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -59,4 +71,4 @@ function CreateAyudasModal() {
     );
 }
 
-export default CreateAyudasModal;
+export default CreateHelpModal;

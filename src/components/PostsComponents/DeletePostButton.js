@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { HelpAPI } from '../../api';
+import { PostsAPI } from '../../api';
 
-function DeleteHelpButton({ helpId }) {
-    async function DELETEDIS(help) {
+function DeletePostButton({ postId }) {
+    async function DELETEDIS(event) {
         try {
-            help.preventDefault();
-            const response = await HelpAPI().removeHelp(helpId);
+            event.preventDefault();
+            const response = await PostsAPI().deletePost(postId);
             window.alert(response.message);
             window.location.reload();
         } catch (error) {
@@ -19,4 +19,4 @@ function DeleteHelpButton({ helpId }) {
     );
 }
 
-export default DeleteHelpButton; 
+export default DeletePostButton; 

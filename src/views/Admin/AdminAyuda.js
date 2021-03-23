@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
-import CreateAyudasModal from '../../components/HelpComponents/CreateAyudasModal'
-import EditAyudasModal from '../../components/HelpComponents/EditAyudasModal'
+import CreateHelpModal from '../../components/HelpComponents/CreateHelpModal'
+import EditHelpModal from '../../components/HelpComponents/EditHelpModal'
 
 function AdminAyuda() {
     const [state, setState] = useState(undefined)
@@ -17,7 +17,7 @@ function AdminAyuda() {
     async function fetchData() {
         const response = await Axios({
             method: 'GET',
-            url: "http://localhost:8080/help/",
+            url: "http://localhost:8080/ayudas/",
         })
 
         setState(response.data);
@@ -35,7 +35,7 @@ function AdminAyuda() {
                     <Nav className="mr-auto">
                     </Nav>
                     <Nav>
-                        <CreateAyudasModal/> 
+                        <CreateHelpModal/> 
                     </Nav>
                 </Navbar>
 
@@ -56,7 +56,7 @@ function AdminAyuda() {
                                         <td>{item.number}</td>
                                         <td>{item.link}</td>
                                         <td>
-                                            <EditAyudasModal/>
+                                            <EditHelpModal/>
                                         </td>
                                     </tr>
                                 )

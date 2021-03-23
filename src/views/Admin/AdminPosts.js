@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import Axios from 'axios'
 import { Navbar, Nav, Table, Container } from 'react-bootstrap'
 import CreatePostsModal from '../../components/PostsComponents/CreatePostsModal';
-import EditPostsModal from '../../components/PostsComponents/EditPostsModal'
-
+import EditPostsModal from '../../components/PostsComponents/EditPostsModal';
+import DeletePostModal from '../../components/PostsComponents/DeletePostModal';
+import { PostsAPI } from '../../api';
 
 function AdminPosts() {
     const [state, setState] = useState(undefined)
@@ -16,15 +16,9 @@ function AdminPosts() {
     }, [])
 
     async function fetchData() {
-        const response = await Axios({
-            method: 'GET',
-            url: "http://localhost:8080/post/",
-            headers: {
-                filter: "AdminPosts"
-            }
-        })
-
-        setState(response.data);
+        const response = await PostsAPI().fetchPosts();
+        console.log(response);
+        setState(response);
     }
 
     if(!state) {
@@ -53,6 +47,7 @@ function AdminPosts() {
                             <th>link</th>
                             <th>tags</th>
                             <th>category</th>
+                            <th>actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,7 +63,8 @@ function AdminPosts() {
                                         <td>{item.tags}</td>
                                         <td>{item.category}</td>
                                         <td>
-                                            <EditPostsModal/>
+                                            <EditPostsModal postId={item.id}/>
+                                            <DeletePostModal postId={item.id} postTitle={item.title}/>
                                         </td>
                                     </tr>
                                 )

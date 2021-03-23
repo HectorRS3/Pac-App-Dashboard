@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import Axios from 'axios';
-import {Form, Modal, Button} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form, Modal, Button } from 'react-bootstrap';
 import useInput from '../../hooks/useInput';
+import { PostsAPI } from '../../api'
 
 function CreatePostsModal() {
     const [show, setShow] = useState(false);
@@ -20,41 +20,36 @@ function CreatePostsModal() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            let response = await Axios({
-                method: 'POST',
-                url: 'http://localhost:8080/post/create',
-                headers: {
-                    token: localStorage.getItem('token')
-                },
-                data: {
-                    title: title,
-                    author: author,
-                    summary: summary,
-                    body: body,
-                    link: link,
-                    tags: tags,
-                    category: category
+            const post = {
+                title,
+                author,
+                summary,
+                body,
+                link,
+                category,
+                tags
+            }
 
-                }
-            });
-    
-            window.alert(response.data.message)
+            console.log(post)
+
+            let response = await PostsAPI().publishPost(post)
+            window.alert(response.message)
             window.location.reload()
-        } catch(error) {
+        } catch (error) {
             window.console.log(error.message, error.stack)
         }
     }
 
-    return(
+    return (
         <>
-          <Button variant="outline-light" onClick={handleShow}>Create Post</Button>
-          <Modal show={show} onHide={handleHide}>
+            <Button variant="outline-light" onClick={handleShow}>Create Post</Button>
+            <Modal show={show} onHide={handleHide}>
                 <Modal.Header closeButton>
                     <Modal.Title>Create Post</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                    <Form.Group controlId="formBasicTitle">
+                        <Form.Group controlId="formBasicTitle">
                             <Form.Label>Title</Form.Label>
                             <Form.Control type="text" name="title" placeholder="Enter Title" value={title} onChange={setTitle} />
                         </Form.Group>
@@ -82,15 +77,15 @@ function CreatePostsModal() {
                             <Form.Label>Category</Form.Label>
                             <Form.Control type="text" name="category" placeholder="Enter Category" value={category} onChange={setCategory} />
                         </Form.Group>
-                    
+
                     </Form>
                 </Modal.Body>
-                
+
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleHide}>Close</Button>
                     <Button variant="success" onClick={handleSubmit}>Save</Button>
                 </Modal.Footer>
-                
+
             </Modal>
         </>
     );

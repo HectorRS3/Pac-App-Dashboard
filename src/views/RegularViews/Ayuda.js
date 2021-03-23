@@ -32,19 +32,26 @@ function Ayuda() {
         return (
             <Container>
                 <h1>Ayuda</h1>
-                <hr/>
-                <a href="tel:787-219-4333">Topis number</a>
+                <hr />
                 <Card>
-                        {
-                            state.map(item => {
-                                return (
-                                    <div>
-                                        <div> title: {item.title} </div>
-                                        <div> link: {item.link} </div>
-                                    </div>
-                                )
-                            })
-                        }
+                    {
+                        state.map(item => {
+                            return (
+                                <container>
+                                    <Card>
+                                        <Card.Header>
+                                            <Card.Title> {item.title}
+                                                <div>
+                                                    <a href="tel:{item.number}"> Numero de Contacto {item.number} </a>
+                                                </div>
+                                            </Card.Title>
+                                            <a href="{item.link}"> Mas Informacion... </a>
+                                        </Card.Header>
+                                    </Card>
+                                </container>
+                            )
+                        })
+                    }
                 </Card>
             </Container>
         )
