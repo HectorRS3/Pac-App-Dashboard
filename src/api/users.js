@@ -2,7 +2,8 @@ const ip = require("public-ip");
 let API_URL;
 
 (async () => {
-  API_URL = `http://${(await ip.v4())}:8080`;
+  const publicIp = await ip.v4();
+  API_URL = `http://${publicIp}:8080`;
 });
 
 export default function UsersAPI() {
