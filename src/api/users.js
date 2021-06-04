@@ -1,4 +1,5 @@
-const API_URL = '192.168.150.128:8080';
+const ip = require("ip");
+const API_URL = ip.address() + ':8080';
 
 export default function UsersAPI() {
   const fetchUsers = () => {
