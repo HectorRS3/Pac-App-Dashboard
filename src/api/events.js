@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:8080"
+const ip = require("ip");
+const API_URL = ip.address() + ':8080';
 
 export default function EventsAPI() {
   const fetchEvents = () => {
