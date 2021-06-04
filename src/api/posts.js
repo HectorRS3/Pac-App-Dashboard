@@ -1,10 +1,12 @@
 const ip = require("public-ip");
 let API_URL;
 
-(async () => {
+const setIP = async () => {
   const publicIp = await ip.v4();
   API_URL = `http://${publicIp}:8080`;
-});
+}
+
+setIP();
 
 export default function PostsAPI() {
   const fetchPosts = () => {
