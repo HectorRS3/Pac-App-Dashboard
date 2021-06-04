@@ -1,5 +1,9 @@
-const ip = require("ip");
-const API_URL = 'http://' + ip.address() + ':8080';
+const ip = require("public-ip");
+let API_URL;
+
+(async () => {
+  API_URL = `http://${(await ip.v4())}:8080`;
+});
 
 export default function HelpAPI() {
   const getHelpList = () => {
